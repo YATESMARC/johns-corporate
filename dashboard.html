@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Dashboard — Johns Corporate</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#0E1F3D;--navy-mid:#162d52;--gold:#B8973A;--gold-light:#d4b05a;--off:#F5F3EF;--border:#E0DCD4;--white:#fff;--muted:#888;--green:#1a6a1a;--red:#8B1A1A;}
+body{font-family:'Inter',sans-serif;font-weight:300;background:#f0ede8;color:#1a1a1a;}
+
+/* LOGIN */
+#login{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:9999;}
+.login-box{background:#fff;padding:3rem;width:360px;text-align:center;}
+.login-title{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--navy);margin-bottom:.3rem;}
+.login-title span{color:var(--gold);}
+.login-sub{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;}
+.login-box input{width:100%;border:1px solid var(--border);padding:.85rem 1rem;font-family:'Inter',sans-serif;font-size:.85rem;outline:none;margin-bottom:1rem;transition:border-color .2s;}
+.login-box input:focus{border-color:var(--gold);}
+.login-btn{width:100%;background:var(--navy);color:#fff;border:none;padding:1rem;font-family:'Inter',sans-serif;font-size:.76rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.login-btn:hover{background:var(--gold);color:var(--navy);}
+.login-err{color:var(--red);font-size:.74rem;margin-top:.5rem;display:none;}
+
+/* LAYOUT */
+#app{display:none;}
+.header{background:var(--navy);color:#fff;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+.header-brand{font-family:'Playfair Display',serif;font-size:1.2rem;}
+.header-brand span{color:var(--gold);}
+.header-right{display:flex;gap:1.5rem;align-items:center;font-size:.72rem;color:rgba(255,255,255,.5);}
+.header-right a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.header-right a:hover{color:var(--gold-light);}
+.header-date{font-size:.7rem;color:rgba(255,255,255,.35);}
+
+.body{display:grid;grid-template-columns:200px 1fr;min-height:calc(100vh - 56px);}
+
+/* SIDEBAR */
+.sidebar{background:var(--navy-mid);padding:1.5rem 0;}
+.nav-section{font-size:.54rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(184,151,58,.5);padding:.5rem 1.5rem;margin-top:1rem;}
+.nav-item{display:flex;align-items:center;gap:.7rem;padding:.75rem 1.5rem;font-size:.74rem;color:rgba(255,255,255,.45);cursor:pointer;transition:all .2s;border-left:3px solid transparent;}
+.nav-item:hover,.nav-item.active{color:#fff;background:rgba(255,255,255,.06);border-left-color:var(--gold);}
+.nav-item .icon{font-size:.9rem;width:1.2rem;text-align:center;}
+.nav-sep{height:1px;background:rgba(255,255,255,.06);margin:.75rem 0;}
+
+/* MAIN */
+.main{padding:2rem;overflow-x:hidden;}
+.page{display:none;}
+.page.active{display:block;}
+
+/* PAGE TITLE */
+.page-title{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--navy);margin-bottom:.3rem;font-weight:400;}
+.page-title em{font-style:italic;color:var(--gold);}
+.page-sub{font-size:.74rem;color:var(--muted);margin-bottom:2rem;}
+
+/* STAT CARDS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem;}
+.stat-card{background:#fff;padding:1.5rem;border-top:3px solid var(--border);transition:box-shadow .2s;}
+.stat-card:hover{box-shadow:0 4px 16px rgba(14,31,61,.08);}
+.stat-card.gold{border-top-color:var(--gold);}
+.stat-card.navy{border-top-color:var(--navy);}
+.stat-card.green{border-top-color:var(--green);}
+.stat-card.red{border-top-color:var(--red);}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--navy);line-height:1;}
+.stat-trend{font-size:.65rem;color:var(--green);margin-top:.2rem;}
+.stat-trend.down{color:var(--red);}
+.stat-lbl{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.4rem;}
+
+/* CHARTS ROW */
+.charts-row{display:grid;grid-template-columns:2fr 1fr;gap:1rem;margin-bottom:2rem;}
+.chart-card{background:#fff;padding:1.5rem;}
+.chart-card.full{grid-column:1/-1;}
+.chart-title{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);margin-bottom:1.2rem;font-weight:500;}
+.chart-wrap{position:relative;}
+
+/* FILTERS */
+.filters{display:flex;gap:.6rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center;}
+.filter-btn{background:#fff;border:1px solid var(--border);padding:.42rem .9rem;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;color:var(--muted);}
+.filter-btn.active,.filter-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+.search-box{border:1px solid var(--border);background:#fff;padding:.42rem .8rem;font-size:.78rem;font-family:'Inter',sans-serif;outline:none;flex:1;min-width:180px;max-width:300px;transition:border-color .2s;}
+.search-box:focus{border-color:var(--gold);}
+.spacer{flex:1;}
+.export-btn{background:var(--gold);color:var(--navy);border:none;padding:.45rem 1.2rem;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s;}
+.export-btn:hover{background:var(--gold-light);}
+
+/* TABLE */
+.table-wrap{background:#fff;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:.74rem;}
+thead th{background:var(--navy);color:rgba(255,255,255,.75);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;padding:.75rem 1rem;text-align:left;white-space:nowrap;font-weight:400;}
+tbody td{padding:.75rem 1rem;border-bottom:1px solid var(--border);vertical-align:middle;}
+tbody tr:hover td{background:var(--off);}
+.td-name{font-weight:500;color:var(--navy);}
+.td-company{font-size:.68rem;color:var(--muted);}
+
+/* BADGES */
+.badge{display:inline-block;font-size:.56rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .55rem;}
+.badge-imprimeur{background:rgba(14,31,61,.1);color:var(--navy);}
+.badge-agence{background:rgba(184,151,58,.15);color:#7a5c00;}
+.badge-distributeur{background:rgba(26,106,26,.12);color:#1a5a1a;}
+.badge-entreprise{background:rgba(100,50,150,.1);color:#5a1a8a;}
+.badge-ecole{background:rgba(50,100,180,.1);color:#1a3a8a;}
+.badge-association{background:rgba(180,80,20,.1);color:#8a3a00;}
+.badge-club{background:rgba(20,100,100,.1);color:#1a5a5a;}
+.badge-collectivite{background:rgba(100,100,20,.1);color:#5a5a00;}
+.badge-revendeur{background:rgba(139,26,26,.1);color:var(--red);}
+.badge-autre{background:#f0f0f0;color:var(--muted);}
+
+/* ACTION BTNS */
+.act-btn{background:none;border:1px solid var(--border);padding:.22rem .55rem;font-size:.6rem;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;color:var(--muted);margin-right:.3rem;}
+.act-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+.act-btn.wa{color:#25D366;border-color:rgba(37,211,102,.3);}
+.act-btn.wa:hover{background:#25D366;color:#fff;border-color:#25D366;}
+
+/* DETAIL PANEL */
+.panel{position:fixed;right:0;top:0;bottom:0;width:400px;background:#fff;box-shadow:-4px 0 24px rgba(0,0,0,.12);z-index:500;transform:translateX(100%);transition:transform .3s;overflow-y:auto;padding:2rem;}
+.panel.open{transform:translateX(0);}
+.panel-close{background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--muted);margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:.72rem;}
+.panel-name{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--navy);margin-bottom:.3rem;}
+.panel-company{font-size:.75rem;color:var(--muted);margin-bottom:1.5rem;}
+.panel-actions{display:flex;gap:.6rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.panel-sep{height:1px;background:var(--border);margin:1.2rem 0;}
+.panel-field{margin-bottom:.9rem;}
+.panel-label{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem;}
+.panel-val{font-size:.82rem;color:#1a1a1a;line-height:1.5;}
+.panel-section{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:.2rem 0 1rem;display:flex;align-items:center;gap:.6rem;}
+.panel-section::before{content:'';width:1rem;height:1px;background:var(--gold);}
+
+/* ADD CLIENT FORM */
+.add-form{background:#fff;padding:2rem;margin-bottom:1.5rem;}
+.add-form-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--navy);margin-bottom:1.5rem;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-group{display:flex;flex-direction:column;gap:.35rem;}
+.form-group.full{grid-column:1/-1;}
+.form-group label{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+.form-group input,.form-group select,.form-group textarea{border:1px solid var(--border);padding:.75rem .9rem;font-family:'Inter',sans-serif;font-size:.82rem;outline:none;transition:border-color .2s;width:100%;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);}
+.form-group textarea{min-height:80px;resize:vertical;}
+.form-actions{display:flex;gap:.8rem;margin-top:1.5rem;}
+.submit-btn{background:var(--navy);color:#fff;border:none;padding:.85rem 2rem;font-family:'Inter',sans-serif;font-size:.74rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.submit-btn:hover{background:var(--gold);color:var(--navy);}
+.cancel-btn{background:none;border:1px solid var(--border);padding:.85rem 1.5rem;font-family:'Inter',sans-serif;font-size:.74rem;cursor:pointer;color:var(--muted);}
+
+/* EMPTY */
+.empty{text-align:center;padding:4rem 2rem;color:var(--muted);}
+.empty-icon{font-size:3rem;opacity:.25;margin-bottom:1rem;}
+
+/* MINI CHARTS */
+.mini-charts{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .body{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .charts-row{grid-template-columns:1fr;}
+  .mini-charts{grid-template-columns:1fr;}
+  .panel{width:100%;}
+  .form-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="login-box">
+    <div class="login-title">Johns <span>Corporate</span></div>
+    <div class="login-sub">Dashboard — Accès administrateur</div>
+    <input type="password" id="pwd" placeholder="Mot de passe" onkeypress="if(event.key==='Enter')login()"/>
+    <button class="login-btn" onclick="login()">Accéder au dashboard</button>
+    <div class="login-err" id="login-err">Mot de passe incorrect.</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="header">
+    <div class="header-brand">Johns <span>Corporate</span> — Dashboard</div>
+    <div class="header-right">
+      <span class="header-date" id="today-date"></span>
+      <a href="index.html">← Retour site</a>
+      <a href="#" onclick="logout()">Déconnexion</a>
+    </div>
+  </div>
+  <div class="body">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+      <div class="nav-section">Vue générale</div>
+      <div class="nav-item active" onclick="showPage('overview',this)"><span class="icon">📊</span> Aperçu</div>
+      <div class="nav-sep"></div>
+      <div class="nav-section">Clients</div>
+      <div class="nav-item" onclick="showPage('clients',this)"><span class="icon">👥</span> Tous les clients</div>
+      <div class="nav-item" onclick="showPage('nouveaux',this)"><span class="icon">🆕</span> Nouveaux</div>
+      <div class="nav-item" onclick="showPage('ajouter',this)"><span class="icon">➕</span> Ajouter client</div>
+      <div class="nav-sep"></div>
+      <div class="nav-section">Analyses</div>
+      <div class="nav-item" onclick="showPage('types',this)"><span class="icon">🏷</span> Par type</div>
+      <div class="nav-item" onclick="showPage('villes',this)"><span class="icon">📍</span> Par ville</div>
+      <div class="nav-item" onclick="showPage('produits',this)"><span class="icon">📦</span> Par produit</div>
+      <div class="nav-sep"></div>
+      <div class="nav-item" onclick="exportCSV()"><span class="icon">📥</span> Export CSV</div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- ── PAGE OVERVIEW ── -->
+      <div class="page active" id="page-overview">
+        <div class="page-title">Aperçu <em>général</em></div>
+        <div class="page-sub" id="overview-sub">Chargement…</div>
+
+        <div class="stats-row" id="stats-row"></div>
+
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="chart-title">Nouveaux clients par jour (30 derniers jours)</div>
+            <div class="chart-wrap"><canvas id="chart-daily" height="120"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Répartition par type</div>
+            <div class="chart-wrap"><canvas id="chart-types" height="200"></canvas></div>
+          </div>
+        </div>
+
+        <div class="mini-charts">
+          <div class="chart-card">
+            <div class="chart-title">Top villes</div>
+            <canvas id="chart-villes" height="160"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Produits demandés</div>
+            <canvas id="chart-produits" height="160"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Sources d'acquisition</div>
+            <canvas id="chart-sources" height="160"></canvas>
+          </div>
+        </div>
+
+        <!-- Derniers clients -->
+        <div class="chart-card">
+          <div class="chart-title">5 derniers clients</div>
+          <div class="table-wrap" id="recent-table"></div>
+        </div>
+      </div>
+
+      <!-- ── PAGE CLIENTS ── -->
+      <div class="page" id="page-clients">
+        <div class="page-title">Tous les <em>clients</em></div>
+        <div class="page-sub" id="clients-sub"></div>
+        <div class="filters">
+          <input class="search-box" id="search" placeholder="🔍 Rechercher…" oninput="renderClients()"/>
+          <select class="search-box" id="filter-type" onchange="renderClients()" style="max-width:180px;">
+            <option value="">Tous les types</option>
+            <option>Imprimeur</option><option>Distributeur</option><option>Agence de communication</option>
+            <option>Entreprise</option><option>École / Université</option><option>Association</option>
+            <option>Club sportif</option><option>Collectivité</option><option>Revendeur textile</option><option>Autre</option>
+          </select>
+          <select class="search-box" id="filter-ville" onchange="renderClients()" style="max-width:150px;"><option value="">Toutes villes</option></select>
+          <div class="spacer"></div>
+          <button class="export-btn" onclick="exportCSV()">📥 Export CSV</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>Date</th><th>Société</th><th>Contact</th><th>Téléphone</th>
+              <th>Email</th><th>Ville</th><th>Type</th><th>Produit</th><th>Source</th><th>Actions</th>
+            </tr></thead>
+            <tbody id="clients-tbody"></tbody>
+          </table>
+        </div>
+        <div class="empty" id="clients-empty" style="display:none;"><div class="empty-icon">👥</div><p>Aucun client trouvé.</p></div>
+      </div>
+
+      <!-- ── PAGE NOUVEAUX ── -->
+      <div class="page" id="page-nouveaux">
+        <div class="page-title">Nouveaux <em>clients</em></div>
+        <div class="page-sub" id="nouveaux-sub"></div>
+        <div class="filters">
+          <button class="filter-btn active" onclick="setNewFilter('today',this)">Aujourd'hui</button>
+          <button class="filter-btn" onclick="setNewFilter('week',this)">Cette semaine</button>
+          <button class="filter-btn" onclick="setNewFilter('month',this)">Ce mois</button>
+          <div class="spacer"></div>
+          <button class="export-btn" onclick="exportCSV()">📥 Export CSV</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Date</th><th>Heure</th><th>Société</th><th>Contact</th><th>Téléphone</th><th>Type</th><th>Produit</th><th>Actions</th></tr></thead>
+            <tbody id="nouveaux-tbody"></tbody>
+          </table>
+        </div>
+        <div class="empty" id="nouveaux-empty" style="display:none;"><div class="empty-icon">🆕</div><p>Aucun nouveau client sur cette période.</p></div>
+      </div>
+
+      <!-- ── PAGE AJOUTER ── -->
+      <div class="page" id="page-ajouter">
+        <div class="page-title">Ajouter un <em>client</em></div>
+        <div class="page-sub">Saisie manuelle d'un nouveau client</div>
+        <div class="add-form">
+          <div class="form-grid">
+            <div class="form-group"><label>Société</label><input id="f-societe" placeholder="Nom de l'entreprise"/></div>
+            <div class="form-group"><label>Nom & Prénom *</label><input id="f-nom" placeholder="Mohamed Alaoui" required/></div>
+            <div class="form-group"><label>Téléphone *</label><input id="f-tel" placeholder="+212 6XX XXX XXX"/></div>
+            <div class="form-group"><label>Email</label><input id="f-email" type="email" placeholder="contact@societe.ma"/></div>
+            <div class="form-group"><label>Ville</label><input id="f-ville" placeholder="Casablanca"/></div>
+            <div class="form-group"><label>Type de client *</label>
+              <select id="f-type">
+                <option value="">Sélectionner…</option>
+                <option>Imprimeur</option><option>Distributeur</option><option>Agence de communication</option>
+                <option>Entreprise</option><option>École / Université</option><option>Association</option>
+                <option>Club sportif</option><option>Collectivité</option><option>Revendeur textile</option><option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Produit(s) souhaité(s)</label>
+              <select id="f-produit">
+                <option value="">Sélectionner…</option>
+                <option>Tote Bag Trendik 240g</option><option>Sac Siltex 140g</option><option>Sac à dos Lambur RPET</option>
+                <option>T-Shirt Original T 140g</option><option>T-Shirt Valueweight 160g</option><option>T-Shirt Iconic 195g</option>
+                <option>Polo Piqué 65/35</option><option>Casquette Sport</option><option>EPI</option>
+                <option>Plusieurs produits</option><option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Source</label>
+              <select id="f-source">
+                <option>Site web</option><option>Google</option><option>Instagram</option>
+                <option>LinkedIn</option><option>Recommandation</option><option>Appel entrant</option><option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group full"><label>Notes</label><textarea id="f-notes" placeholder="Informations complémentaires…"></textarea></div>
+          </div>
+          <div class="form-actions">
+            <button class="submit-btn" onclick="addClient()">Ajouter le client →</button>
+            <button class="cancel-btn" onclick="clearForm()">Effacer</button>
+          </div>
+          <div id="add-success" style="display:none;background:#e8f5e8;border-left:3px solid #2a6a2a;padding:.8rem 1rem;font-size:.78rem;color:#1a5a1a;margin-top:1rem;">✓ Client ajouté avec succès.</div>
+        </div>
+      </div>
+
+      <!-- ── PAGE TYPES ── -->
+      <div class="page" id="page-types">
+        <div class="page-title">Clients par <em>type</em></div>
+        <div class="page-sub">Répartition de votre portefeuille clients</div>
+        <div class="charts-row" style="margin-bottom:1.5rem;">
+          <div class="chart-card"><div class="chart-title">Répartition types clients</div><canvas id="chart-types2" height="250"></canvas></div>
+          <div class="chart-card"><div class="chart-title">Top types</div><canvas id="chart-types-bar" height="250"></canvas></div>
+        </div>
+        <div id="types-breakdown"></div>
+      </div>
+
+      <!-- ── PAGE VILLES ── -->
+      <div class="page" id="page-villes">
+        <div class="page-title">Clients par <em>ville</em></div>
+        <div class="page-sub">Distribution géographique</div>
+        <div class="chart-card" style="margin-bottom:1.5rem;"><div class="chart-title">Clients par ville</div><canvas id="chart-villes2" height="200"></canvas></div>
+        <div id="villes-breakdown"></div>
+      </div>
+
+      <!-- ── PAGE PRODUITS ── -->
+      <div class="page" id="page-produits">
+        <div class="page-title">Produits <em>demandés</em></div>
+        <div class="page-sub">Quels produits intéressent le plus vos clients</div>
+        <div class="chart-card" style="margin-bottom:1.5rem;"><div class="chart-title">Produits les plus demandés</div><canvas id="chart-produits2" height="200"></canvas></div>
+        <div id="produits-breakdown"></div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- DETAIL PANEL -->
+<div class="panel" id="detail-panel">
+  <button class="panel-close" onclick="closePanel()">✕ Fermer</button>
+  <div id="panel-content"></div>
+</div>
+
+<script>
+// ── CONFIG ──────────────────────────────
+const PWD = 'johns2025'; // ← CHANGER ICI
+
+// ── AUTH ─────────────────────────────────
+function login() {
+  const v = document.getElementById('pwd').value;
+  if(v === PWD) {
+    sessionStorage.setItem('jc_auth','1');
+    document.getElementById('login').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('today-date').textContent = new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    init();
+  } else {
+    document.getElementById('login-err').style.display='block';
+  }
+}
+function logout() { sessionStorage.removeItem('jc_auth'); location.reload(); }
+if(sessionStorage.getItem('jc_auth')==='1') {
+  document.getElementById('login').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('today-date').textContent = new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+}
+document.getElementById('pwd')?.addEventListener('keypress', e => { if(e.key==='Enter') login(); });
+
+// ── DATA ─────────────────────────────────
+function getClients() { return JSON.parse(localStorage.getItem('jc_clients')||'[]'); }
+function saveClients(arr) { localStorage.setItem('jc_clients', JSON.stringify(arr)); }
+
+// Couleurs chart
+const COLORS = ['#0E1F3D','#B8973A','#162d52','#d4b05a','#2a4a7a','#8a6a20','#1a3a5a','#6a4a10','#3a5a8a','#4a3a20'];
+const TYPE_COLORS = {
+  'Imprimeur':'#0E1F3D','Distributeur':'#1a6a1a','Agence de communication':'#B8973A',
+  'Entreprise':'#5a1a8a','École / Université':'#1a3a8a','Association':'#8a3a00',
+  'Club sportif':'#1a5a5a','Collectivité':'#5a5a00','Revendeur textile':'#8B1A1A','Autre':'#888'
+};
+
+function badgeClass(type) {
+  const map = {'Imprimeur':'imprimeur','Distributeur':'distributeur','Agence de communication':'agence','Entreprise':'entreprise','École / Université':'ecole','Association':'association','Club sportif':'club','Collectivité':'collectivite','Revendeur textile':'revendeur'};
+  return 'badge badge-'+(map[type]||'autre');
+}
+
+// ── CHARTS ───────────────────────────────
+let charts = {};
+function destroyChart(id) { if(charts[id]) { charts[id].destroy(); delete charts[id]; } }
+
+function makeBar(id, labels, data, color='#0E1F3D') {
+  destroyChart(id);
+  const ctx = document.getElementById(id);
+  if(!ctx) return;
+  charts[id] = new Chart(ctx, {
+    type:'bar',
+    data:{ labels, datasets:[{ data, backgroundColor: Array.isArray(color)?color:labels.map((_,i)=>COLORS[i%COLORS.length]), borderWidth:0, borderRadius:2 }] },
+    options:{ responsive:true, plugins:{ legend:{display:false} }, scales:{ x:{grid:{display:false},ticks:{font:{size:10,family:'Inter'}}}, y:{grid:{color:'#f0ede8'},ticks:{font:{size:10,family:'Inter'},precision:0}} } }
+  });
+}
+function makeDoughnut(id, labels, data) {
+  destroyChart(id);
+  const ctx = document.getElementById(id);
+  if(!ctx) return;
+  charts[id] = new Chart(ctx, {
+    type:'doughnut',
+    data:{ labels, datasets:[{ data, backgroundColor:labels.map(l=>TYPE_COLORS[l]||COLORS[labels.indexOf(l)%COLORS.length]), borderWidth:2, borderColor:'#fff' }] },
+    options:{ responsive:true, plugins:{ legend:{ position:'bottom', labels:{font:{size:10,family:'Inter'},padding:8} } }, cutout:'60%' }
+  });
+}
+function makeLine(id, labels, data) {
+  destroyChart(id);
+  const ctx = document.getElementById(id);
+  if(!ctx) return;
+  charts[id] = new Chart(ctx, {
+    type:'line',
+    data:{ labels, datasets:[{ data, borderColor:'#B8973A', backgroundColor:'rgba(184,151,58,0.08)', borderWidth:2, fill:true, tension:0.4, pointBackgroundColor:'#B8973A', pointRadius:3 }] },
+    options:{ responsive:true, plugins:{legend:{display:false}}, scales:{ x:{grid:{display:false},ticks:{font:{size:9,family:'Inter'}}}, y:{grid:{color:'#f0ede8'},ticks:{font:{size:10,family:'Inter'},precision:0}} } }
+  });
+}
+
+// ── STATS ────────────────────────────────
+function computeStats(clients) {
+  const today = new Date().toLocaleDateString('fr-FR');
+  const week = new Date(Date.now()-7*86400000);
+  const month = new Date(Date.now()-30*86400000);
+  const parseDate = s => { const p=s.split('/'); return new Date(p[2],p[1]-1,p[0]); };
+
+  return {
+    total: clients.length,
+    today: clients.filter(c=>c.date===today).length,
+    week:  clients.filter(c=>parseDate(c.date)>=week).length,
+    month: clients.filter(c=>parseDate(c.date)>=month).length,
+  };
+}
+
+function renderStats() {
+  const cl = getClients();
+  const s = computeStats(cl);
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card navy"><div class="stat-num">${s.total}</div><div class="stat-lbl">Total clients</div></div>
+    <div class="stat-card gold"><div class="stat-num">${s.today}</div><div class="stat-lbl">Aujourd'hui</div></div>
+    <div class="stat-card green"><div class="stat-num">${s.week}</div><div class="stat-lbl">Cette semaine</div></div>
+    <div class="stat-card"><div class="stat-num">${s.month}</div><div class="stat-lbl">Ce mois</div></div>
+  `;
+  document.getElementById('overview-sub').textContent = `Mis à jour le ${new Date().toLocaleDateString('fr-FR')} — ${s.total} client${s.total>1?'s':''} enregistré${s.total>1?'s':''}`;
+}
+
+function renderCharts() {
+  const cl = getClients();
+
+  // Daily (30 days)
+  const days = [];
+  const dayCounts = [];
+  for(let i=29;i>=0;i--) {
+    const d = new Date(Date.now()-i*86400000);
+    const label = d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'});
+    days.push(label);
+    dayCounts.push(cl.filter(c=>c.date===d.toLocaleDateString('fr-FR')).length);
+  }
+  makeLine('chart-daily', days, dayCounts);
+
+  // Types
+  const typeCounts = {};
+  cl.forEach(c => { const t=c.type||'Autre'; typeCounts[t]=(typeCounts[t]||0)+1; });
+  const typeEntries = Object.entries(typeCounts).sort((a,b)=>b[1]-a[1]);
+  makeDoughnut('chart-types', typeEntries.map(e=>e[0]), typeEntries.map(e=>e[1]));
+  if(document.getElementById('chart-types2')) makeDoughnut('chart-types2', typeEntries.map(e=>e[0]), typeEntries.map(e=>e[1]));
+  if(document.getElementById('chart-types-bar')) makeBar('chart-types-bar', typeEntries.map(e=>e[0]), typeEntries.map(e=>e[1]));
+
+  // Villes
+  const villeCounts = {};
+  cl.forEach(c => { const v=c.ville||'Non renseigné'; villeCounts[v]=(villeCounts[v]||0)+1; });
+  const villeEntries = Object.entries(villeCounts).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  makeBar('chart-villes', villeEntries.map(e=>e[0]), villeEntries.map(e=>e[1]));
+  if(document.getElementById('chart-villes2')) makeBar('chart-villes2', villeEntries.map(e=>e[0]), villeEntries.map(e=>e[1]));
+
+  // Produits
+  const prodCounts = {};
+  cl.forEach(c => { const p=c.produit||'Non renseigné'; prodCounts[p]=(prodCounts[p]||0)+1; });
+  const prodEntries = Object.entries(prodCounts).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  makeBar('chart-produits', prodEntries.map(e=>e[0]), prodEntries.map(e=>e[1]));
+  if(document.getElementById('chart-produits2')) makeBar('chart-produits2', prodEntries.map(e=>e[0]), prodEntries.map(e=>e[1]));
+
+  // Sources
+  const srcCounts = {};
+  cl.forEach(c => { const s=c.source||'Autre'; srcCounts[s]=(srcCounts[s]||0)+1; });
+  const srcEntries = Object.entries(srcCounts).sort((a,b)=>b[1]-a[1]);
+  makeBar('chart-sources', srcEntries.map(e=>e[0]), srcEntries.map(e=>e[1]));
+
+  // Villes filter
+  const sel = document.getElementById('filter-ville');
+  if(sel) {
+    const current = sel.value;
+    sel.innerHTML = '<option value="">Toutes villes</option>' + Object.keys(villeCounts).sort().map(v=>`<option ${v===current?'selected':''}>${v}</option>`).join('');
+  }
+}
+
+function renderRecent() {
+  const cl = getClients().slice(0,5);
+  const wrap = document.getElementById('recent-table');
+  if(!wrap) return;
+  if(!cl.length) { wrap.innerHTML='<div class="empty"><div class="empty-icon">👥</div><p>Aucun client enregistré.</p></div>'; return; }
+  wrap.innerHTML = `<table><thead><tr><th>Date</th><th>Société</th><th>Contact</th><th>Type</th><th>Produit</th><th>Actions</th></tr></thead>
+  <tbody>${cl.map(c=>`<tr>
+    <td style="font-size:.68rem;color:var(--muted);white-space:nowrap;">${c.date}</td>
+    <td><div class="td-name">${c.societe||'—'}</div></td>
+    <td><div class="td-name">${c.nom||'—'}</div></td>
+    <td><span class="${badgeClass(c.type)}">${c.type||'—'}</span></td>
+    <td style="font-size:.68rem;">${c.produit||'—'}</td>
+    <td><button class="act-btn" onclick="showDetail(${c.id})">Voir</button></td>
+  </tr>`).join('')}</tbody></table>`;
+}
+
+// ── CLIENTS TABLE ─────────────────────────
+function renderClients() {
+  const cl = getClients();
+  const q = (document.getElementById('search')?.value||'').toLowerCase();
+  const ft = document.getElementById('filter-type')?.value||'';
+  const fv = document.getElementById('filter-ville')?.value||'';
+  const filtered = cl.filter(c => {
+    const mq = !q || [c.nom,c.societe,c.email,c.telephone,c.ville].some(v=>(v||'').toLowerCase().includes(q));
+    const mt = !ft || c.type===ft;
+    const mv = !fv || c.ville===fv;
+    return mq && mt && mv;
+  });
+  const tbody = document.getElementById('clients-tbody');
+  const empty = document.getElementById('clients-empty');
+  document.getElementById('clients-sub').textContent = `${filtered.length} client${filtered.length>1?'s':''} trouvé${filtered.length>1?'s':''}`;
+  if(!filtered.length) { tbody.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  tbody.innerHTML = filtered.map(c=>`<tr>
+    <td style="font-size:.68rem;color:var(--muted);white-space:nowrap;">${c.date}</td>
+    <td><div class="td-name">${c.societe||'—'}</div></td>
+    <td><div class="td-name">${c.nom||'—'}</div><div class="td-company">${c.email||''}</div></td>
+    <td><a href="tel:${c.telephone}" style="color:var(--navy);font-size:.74rem;">${c.telephone||'—'}</a></td>
+    <td><a href="mailto:${c.email}" style="color:var(--navy);font-size:.7rem;">${c.email||'—'}</a></td>
+    <td style="font-size:.74rem;">${c.ville||'—'}</td>
+    <td><span class="${badgeClass(c.type)}">${c.type||'—'}</span></td>
+    <td style="font-size:.68rem;">${c.produit||'—'}</td>
+    <td style="font-size:.68rem;">${c.source||'—'}</td>
+    <td style="white-space:nowrap;">
+      <button class="act-btn" onclick="showDetail(${c.id})">Voir</button>
+      <button class="act-btn wa" onclick="openWA('${c.telephone}','${c.nom}')">WA</button>
+      <button class="act-btn" onclick="deleteClient(${c.id})" style="color:var(--red);">✕</button>
+    </td>
+  </tr>`).join('');
+}
+
+// ── NOUVEAUX ──────────────────────────────
+let newFilter = 'today';
+function setNewFilter(f, btn) {
+  newFilter = f;
+  document.querySelectorAll('#page-nouveaux .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderNouveaux();
+}
+function renderNouveaux() {
+  const cl = getClients();
+  const now = Date.now();
+  const parseDate = s => { const p=s.split('/'); return new Date(p[2],p[1]-1,p[0]).getTime(); };
+  const limits = {today: new Date().toLocaleDateString('fr-FR'), week: now-7*86400000, month: now-30*86400000};
+  const filtered = cl.filter(c => {
+    if(newFilter==='today') return c.date===limits.today;
+    return parseDate(c.date) >= limits[newFilter];
+  });
+  const tbody = document.getElementById('nouveaux-tbody');
+  const empty = document.getElementById('nouveaux-empty');
+  document.getElementById('nouveaux-sub').textContent = `${filtered.length} nouveau${filtered.length>1?'x':''} client${filtered.length>1?'s':''}`;
+  if(!filtered.length) { tbody.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  tbody.innerHTML = filtered.map(c=>`<tr>
+    <td style="font-size:.68rem;color:var(--muted);">${c.date}</td>
+    <td style="font-size:.68rem;color:var(--muted);">${c.heure||'—'}</td>
+    <td><div class="td-name">${c.societe||'—'}</div></td>
+    <td><div class="td-name">${c.nom||'—'}</div></td>
+    <td><a href="tel:${c.telephone}" style="color:var(--navy);font-size:.74rem;">${c.telephone||'—'}</a></td>
+    <td><span class="${badgeClass(c.type)}">${c.type||'—'}</span></td>
+    <td style="font-size:.68rem;">${c.produit||'—'}</td>
+    <td style="white-space:nowrap;">
+      <button class="act-btn" onclick="showDetail(${c.id})">Voir</button>
+      <button class="act-btn wa" onclick="openWA('${c.telephone}','${c.nom}')">WA</button>
+    </td>
+  </tr>`).join('');
+}
+
+// ── BREAKDOWN TABLES ──────────────────────
+function renderBreakdown(pageId, field, containerId) {
+  const cl = getClients();
+  const counts = {};
+  cl.forEach(c => { const v=c[field]||'Non renseigné'; counts[v]=(counts[v]||0)+1; });
+  const entries = Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+  const total = cl.length || 1;
+  document.getElementById(containerId).innerHTML = `
+    <div class="table-wrap"><table>
+      <thead><tr><th>${field==='type'?'Type':'Valeur'}</th><th>Clients</th><th>Part</th></tr></thead>
+      <tbody>${entries.map(([v,n])=>`<tr>
+        <td>${field==='type'?`<span class="${badgeClass(v)}">${v}</span>`:v}</td>
+        <td><strong>${n}</strong></td>
+        <td>
+          <div style="display:flex;align-items:center;gap:.8rem;">
+            <div style="flex:1;height:6px;background:#f0ede8;"><div style="height:6px;background:var(--gold);width:${Math.round(n/total*100)}%;"></div></div>
+            <span style="font-size:.72rem;color:var(--muted);white-space:nowrap;">${Math.round(n/total*100)}%</span>
+          </div>
+        </td>
+      </tr>`).join('')}
+      </tbody>
+    </table></div>`;
+}
+
+// ── ADD CLIENT ────────────────────────────
+function addClient() {
+  const nom = document.getElementById('f-nom').value.trim();
+  const tel = document.getElementById('f-tel').value.trim();
+  const type = document.getElementById('f-type').value;
+  if(!nom || !tel || !type) { alert('Nom, téléphone et type sont obligatoires.'); return; }
+  const cl = getClients();
+  cl.unshift({
+    id: Date.now(),
+    date: new Date().toLocaleDateString('fr-FR'),
+    heure: new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),
+    societe: document.getElementById('f-societe').value.trim(),
+    nom, telephone: tel, type,
+    email: document.getElementById('f-email').value.trim(),
+    ville: document.getElementById('f-ville').value.trim(),
+    produit: document.getElementById('f-produit').value,
+    source: document.getElementById('f-source').value,
+    notes: document.getElementById('f-notes').value.trim(),
+  });
+  saveClients(cl);
+  document.getElementById('add-success').style.display='block';
+  setTimeout(()=>document.getElementById('add-success').style.display='none',3000);
+  clearForm();
+}
+function clearForm() {
+  ['f-societe','f-nom','f-tel','f-email','f-ville','f-notes'].forEach(id=>document.getElementById(id).value='');
+  ['f-type','f-produit','f-source'].forEach(id=>document.getElementById(id).selectedIndex=0);
+}
+
+// ── DETAIL ────────────────────────────────
+function showDetail(id) {
+  const c = getClients().find(x=>x.id===id);
+  if(!c) return;
+  document.getElementById('panel-content').innerHTML = `
+    <div class="panel-name">${c.nom||'—'}</div>
+    <div class="panel-company">${c.societe||'Client particulier'}</div>
+    <div class="panel-actions">
+      <a href="mailto:${c.email}" class="act-btn">✉ Email</a>
+      <a href="tel:${c.telephone}" class="act-btn">📞 Appel</a>
+      <button class="act-btn wa" onclick="openWA('${c.telephone}','${c.nom}')">💬 WhatsApp</button>
+    </div>
+    <div class="panel-sep"></div>
+    <div class="panel-section">Informations</div>
+    ${[['Société',c.societe],['Téléphone',c.telephone],['Email',c.email],['Ville',c.ville],['Type',c.type],['Produit',c.produit],['Source',c.source],['Date',c.date+' à '+(c.heure||'')],['Notes',c.notes]].filter(([,v])=>v).map(([l,v])=>`<div class="panel-field"><div class="panel-label">${l}</div><div class="panel-val">${v}</div></div>`).join('')}
+  `;
+  document.getElementById('detail-panel').classList.add('open');
+}
+function closePanel() { document.getElementById('detail-panel').classList.remove('open'); }
+
+function deleteClient(id) {
+  if(!confirm('Supprimer ce client ?')) return;
+  saveClients(getClients().filter(x=>x.id!==id));
+  renderClients(); renderStats();
+}
+function openWA(tel, nom) {
+  const t=(tel||'').replace(/\D/g,'');
+  window.open(`https://wa.me/${t}?text=Bonjour%20${encodeURIComponent(nom)}%2C%20Johns%20Corporate%20%E2%80%94%20suite%20%C3%A0%20votre%20demande.`,'_blank');
+}
+
+// ── EXPORT CSV ────────────────────────────
+function exportCSV() {
+  const cl = getClients();
+  if(!cl.length) { alert('Aucun client à exporter.'); return; }
+  const cols = ['date','heure','societe','nom','telephone','email','ville','type','produit','source','notes'];
+  const head = ['Date','Heure','Société','Nom','Téléphone','Email','Ville','Type de client','Produit','Source','Notes'];
+  const csv = '\uFEFF'+head.join(';')+'\n'+cl.map(c=>cols.map(k=>`"${(c[k]||'').toString().replace(/"/g,'""')}"`).join(';')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download = 'clients-johns-corporate-'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+}
+
+// ── NAV ───────────────────────────────────
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id)?.classList.add('active');
+  el?.classList.add('active');
+  closePanel();
+
+  // Render page-specific content
+  if(id==='overview') { renderStats(); renderCharts(); renderRecent(); }
+  if(id==='clients') { renderClients(); renderCharts(); }
+  if(id==='nouveaux') renderNouveaux();
+  if(id==='types') { renderCharts(); renderBreakdown(id,'type','types-breakdown'); }
+  if(id==='villes') { renderCharts(); renderBreakdown(id,'ville','villes-breakdown'); }
+  if(id==='produits') { renderCharts(); renderBreakdown(id,'produit','produits-breakdown'); }
+}
+
+// ── INIT ──────────────────────────────────
+function init() {
+  renderStats();
+  renderCharts();
+  renderRecent();
+
+  // Also capture form submissions from other pages
+  window.addEventListener('storage', e => {
+    if(e.key==='jc_clients') { renderStats(); renderCharts(); renderRecent(); }
+  });
+}
+if(sessionStorage.getItem('jc_auth')==='1') init();
+
+// ── EXPOSE saveClient globally (for devis.html to call) ──
+window.JC_saveClient = function(data) {
+  const cl = getClients();
+  cl.unshift({ id:Date.now(), date:new Date().toLocaleDateString('fr-FR'), heure:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}), source:'Site web', ...data });
+  saveClients(cl);
+};
+</script>
+</body>
+</html>
