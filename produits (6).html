@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;color:#1C1C1C;background:#fff;overflow-x:hidden;font-weight:300;}
+img{max-width:100%;height:auto;display:block;}
+a{text-decoration:none;color:inherit;transition:color .2s;}
+
+/* ── NAV ── */
+#nav{position:sticky;top:0;z-index:1000;}
+
+/* Bande 1 */
+.nb1{background:#091525;text-align:center;padding:.42rem 2rem;border-bottom:1px solid rgba(184,151,58,.2);}
+.nb1 span{font-size:.65rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#d4b05a;}
+
+/* Bande 2 */
+.nb2{background:#0d1e38;padding:.75rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:1px solid rgba(184,151,58,.12);}
+.nb2-brand{flex-shrink:0;}
+.nb2-brand-name{font-family:'Playfair Display',serif;font-size:2rem;color:#fff;font-weight:400;line-height:1.1;}
+.nb2-brand-name strong{color:#B8973A;font-style:italic;}
+.nb2-brand-sub{font-size:.5rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#B8973A;margin-top:2px;}
+.nb2-right{display:flex;align-items:center;gap:.8rem;flex-shrink:0;}
+.btn-rev{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#B8973A;border:2px solid #B8973A;padding:.55rem 1.4rem;display:inline-flex;align-items:center;gap:.4rem;transition:all .2s;white-space:nowrap;}
+.btn-rev:hover{background:#B8973A;color:#0E1F3D;}
+.nav-toggle{background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;display:none;padding:.2rem;}
+
+/* Bande 3 */
+.nb3{background:#0E1F3D;border-bottom:1px solid rgba(184,151,58,.12);}
+.nb3-inner{max-width:1400px;margin:0 auto;padding:.55rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+.nb3-contacts{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;}
+.nb3-link{font-size:.66rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#d4b05a;white-space:nowrap;}
+.nb3-link:hover{color:#fff;}
+.nb3-sep{color:rgba(255,255,255,.18);font-size:.8rem;}
+.btn-devis{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:#B8973A;color:#0E1F3D;border:2px solid #B8973A;padding:.55rem 1.6rem;display:inline-flex;align-items:center;white-space:nowrap;flex-shrink:0;transition:background .2s;}
+.btn-devis:hover{background:#d4b05a;border-color:#d4b05a;}
+
+/* Bande 4 */
+.nb4{background:#F0EEE9;border-bottom:3px solid #B8973A;}
+.nb4-inner{max-width:1400px;margin:0 auto;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-links{display:flex;list-style:none;gap:0;height:48px;}
+.nav-links a{display:flex;align-items:center;padding:0 .9rem;height:48px;font-size:.68rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#2a2a2a;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{color:#0E1F3D;border-bottom-color:#B8973A;}
+
+/* Mobile nav */
+@media(max-width:960px){
+  .nb1 span{font-size:.58rem;letter-spacing:.14em;}
+  .nb2{padding:.7rem 1.2rem;}
+  .nb2-brand-name{font-size:1.5rem;}
+  .nb3{display:none;}
+  .nb4{display:none;}
+  .nav-toggle{display:block;}
+  .btn-rev{font-size:.6rem;padding:.45rem .9rem;}
+  .nav-links{display:none;}
+  .nav-links.open{
+    display:flex;flex-direction:column;
+    position:fixed;inset:0;background:#fff;z-index:9999;
+    padding:4rem 2rem 2rem;overflow-y:auto;height:48px;
+  }
+  .nav-links.open{height:auto;}
+  .nav-links.open a{height:auto;padding:1rem 0;font-size:.9rem;border-bottom:1px solid #E2DDD6;border-left:none;}
+  /* Show contacts on mobile */
+  .nb3-mobile{display:flex!important;}
+}
+@media(min-width:961px){.nb3-mobile{display:none!important;}}
+.nb3-mobile{
+  display:none;background:#0E1F3D;
+  padding:.4rem 1.2rem;gap:.6rem;
+  align-items:center;justify-content:center;
+  flex-wrap:wrap;border-bottom:1px solid rgba(184,151,58,.1);
+}
+.nb3-mobile a{font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#d4b05a;}
+
+/* ── BUTTONS ── */
+.btn-primary{display:inline-flex;align-items:center;background:#B8973A;color:#0E1F3D;border:2px solid #B8973A;padding:.85rem 2rem;font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.btn-primary:hover{background:#d4b05a;border-color:#d4b05a;}
+.btn-secondary{display:inline-flex;align-items:center;background:#0E1F3D;color:#fff;border:2px solid #0E1F3D;padding:.85rem 2rem;font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.btn-secondary:hover{background:#162d52;border-color:#162d52;}
+.btn-outline{display:inline-flex;align-items:center;background:transparent;color:#0E1F3D;border:2px solid #0E1F3D;padding:.85rem 2rem;font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.btn-outline:hover{background:#0E1F3D;color:#fff;}
+.btn-outline-white{display:inline-flex;align-items:center;background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6);padding:.85rem 2rem;font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.btn-outline-white:hover{background:#fff;color:#0E1F3D;}
+
+/* ── SECTION HELPERS ── */
+.section{padding:5rem 2.5rem;}
+.section-sm{padding:3.5rem 2.5rem;}
+.container{max-width:1400px;margin:0 auto;}
+.section-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:#B8973A;margin-bottom:.8rem;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);color:#0E1F3D;font-weight:400;line-height:1.1;}
+.section-title em{font-style:italic;color:#B8973A;}
+.section-title-white{color:#fff;}
+.section-title-white em{color:#d4b05a;}
+.section-line{width:50px;height:2px;background:#B8973A;margin:.8rem 0 0;}
+
+/* ── PAGE HERO ── */
+.page-hero{background:linear-gradient(135deg,#091629 0%,#0E1F3D 100%);padding:6rem 2.5rem 4rem;color:#fff;}
+.page-hero-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:#B8973A;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;}
+.page-hero-eyebrow::before{content:'';width:1.5rem;height:1px;background:#B8973A;}
+.page-hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);color:#fff;font-weight:400;margin-bottom:1rem;line-height:1.05;}
+.page-hero-title em{font-style:italic;color:#d4b05a;}
+.page-hero-desc{font-size:.9rem;color:rgba(255,255,255,.55);max-width:50ch;line-height:1.8;}
+
+/* ── TICKER ── */
+.ticker{background:#091629;overflow:hidden;padding:.75rem 0;border-top:1px solid rgba(184,151,58,.15);}
+.ticker-track{display:flex;gap:0;animation:ticker 40s linear infinite;white-space:nowrap;width:max-content;}
+.ticker-item{font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(184,151,58,.7);padding:0 2.5rem;border-right:1px solid rgba(184,151,58,.15);}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ── PRODUIT CARD ── */
+.prod-card{background:#fff;border:1px solid #E2DDD6;display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s,transform .3s;}
+.prod-card:hover{border-color:#0E1F3D;box-shadow:0 6px 24px rgba(14,31,61,.1);transform:translateY(-2px);}
+.prod-visual{position:relative;overflow:hidden;aspect-ratio:4/5;background:#F8F7F4;}
+.prod-visual img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s;}
+.prod-card:hover .prod-visual img{transform:scale(1.04);}
+.prod-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#162d52,#0E1F3D);font-size:4rem;opacity:.15;}
+.prod-ref{position:absolute;top:.7rem;left:.7rem;background:rgba(255,255,255,.94);color:#0E1F3D;font-size:.52rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.2rem .55rem;border:1px solid #E2DDD6;}
+.prod-badge{position:absolute;top:.7rem;right:.7rem;background:#B8973A;color:#0E1F3D;font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .55rem;}
+.prod-badge.green{background:#2D6A2D;color:#fff;}
+.prod-body{padding:1.2rem;flex:1;display:flex;flex-direction:column;border-top:1px solid #E2DDD6;}
+.prod-supplier{font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#B8973A;margin-bottom:.3rem;}
+.prod-name{font-size:.95rem;font-weight:700;color:#0E1F3D;margin-bottom:.25rem;line-height:1.3;}
+.prod-detail{font-size:.68rem;color:#7A7670;margin-bottom:.6rem;line-height:1.5;}
+.prod-desc{font-size:.74rem;color:#555;line-height:1.65;margin-bottom:.6rem;}
+.prod-colors{font-size:.66rem;color:#7A7670;margin-bottom:.7rem;}
+.prod-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.8rem;}
+.prod-tag{font-size:.52rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid #E2DDD6;color:#0E1F3D;padding:.16rem .45rem;background:#F8F7F4;}
+.prod-footer{display:flex;justify-content:space-between;align-items:center;padding-top:.8rem;border-top:1px solid #E2DDD6;margin-top:auto;}
+.prod-prix{font-size:.95rem;font-weight:700;color:#0E1F3D;}
+.prod-prix small{font-size:.58rem;font-weight:400;color:#aaa;display:block;}
+.btn-devis-sm{background:#0E1F3D;color:#fff;padding:.42rem .9rem;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;}
+.btn-devis-sm:hover{background:#B8973A;}
+
+/* ── FORMS ── */
+.jc-form{display:flex;flex-direction:column;gap:1rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.field{display:flex;flex-direction:column;gap:.4rem;}
+.field label{font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7A7670;}
+.field input,.field select,.field textarea{border:1px solid #E2DDD6;padding:.78rem .9rem;font-family:'Montserrat',sans-serif;font-size:.82rem;outline:none;transition:border-color .2s;width:100%;background:#F8F7F4;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#B8973A;background:#fff;}
+.field textarea{resize:vertical;min-height:100px;}
+.form-notice{background:rgba(184,151,58,.07);border-left:2px solid #B8973A;padding:.8rem 1rem;font-size:.72rem;color:#555;line-height:1.6;}
+.form-success{background:#e8f5e8;border-left:3px solid #2D6A2D;padding:1rem 1.2rem;color:#1a5a1a;font-size:.8rem;display:none;margin-bottom:1rem;}
+.form-error{background:#fce8e8;border-left:3px solid #8B1A1A;padding:1rem 1.2rem;color:#8B1A1A;font-size:.8rem;display:none;margin-bottom:1rem;}
+
+/* ── FOOTER ── */
+footer{background:#091629;color:#fff;padding:4rem 2.5rem 2rem;}
+.footer-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:2rem;}
+.footer-brand{font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;margin-bottom:1rem;font-weight:400;}
+.footer-brand span{color:#B8973A;font-style:italic;}
+.footer-desc{font-size:.74rem;color:rgba(255,255,255,.32);line-height:1.8;max-width:28ch;}
+.footer-col-title{font-size:.58rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:#B8973A;margin-bottom:1.2rem;}
+.footer-links{display:flex;flex-direction:column;gap:.5rem;}
+.footer-links a{font-size:.74rem;color:rgba(255,255,255,.35);transition:color .2s;}
+.footer-links a:hover{color:#d4b05a;}
+.footer-contact-item{display:flex;gap:.7rem;margin-bottom:.6rem;font-size:.74rem;color:rgba(255,255,255,.35);}
+.footer-contact-item a{color:rgba(255,255,255,.35);}
+.footer-contact-item a:hover{color:#d4b05a;}
+.footer-bottom{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:.64rem;color:rgba(255,255,255,.18);}
+.footer-note{font-size:.64rem;color:rgba(184,151,58,.35);}
+
+/* ── WA FLOAT ── */
+.wa-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:900;background:#25D366;color:#fff;width:3.2rem;height:3.2rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 4px 20px rgba(37,211,102,.4);animation:float-wa 3s ease-in-out infinite;}
+@keyframes float-wa{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE GENERAL ── */
+@media(max-width:768px){
+  .section{padding:3.5rem 1.5rem;}
+  .form-row{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}
+}
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+}
+
+.page-hero{background:linear-gradient(135deg,#091629 0%,#0E1F3D 100%);padding:7rem 2.5rem 4rem;color:#fff;}
+.produits-layout{display:grid;grid-template-columns:220px 1fr;gap:0;min-height:70vh;}
+.sidebar{background:#F8F7F4;padding:2rem 1.2rem;border-right:1px solid #E2DDD6;position:sticky;top:120px;height:fit-content;}
+.sidebar-title{font-size:.58rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:#B8973A;margin-bottom:1.2rem;}
+.cat-btn{display:block;width:100%;background:none;border:none;text-align:left;padding:.62rem .9rem;font-family:"Montserrat",sans-serif;font-size:.7rem;font-weight:600;color:#7A7670;cursor:pointer;transition:all .2s;border-left:2px solid transparent;}
+.cat-btn:hover{color:#0E1F3D;border-left-color:#E2DDD6;}
+.cat-btn.on{color:#0E1F3D;font-weight:700;border-left-color:#B8973A;background:rgba(184,151,58,.06);}
+.cat-sep{height:1px;background:#E2DDD6;margin:.8rem 0;}
+.prods-main{padding:2.5rem;}
+.cat-section{margin-bottom:3.5rem;}
+.cat-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.8rem;padding-bottom:1rem;border-bottom:2px solid #E2DDD6;flex-wrap:wrap;gap:1rem;}
+.cat-header h2{font-family:"Playfair Display",serif;font-size:1.8rem;color:#0E1F3D;font-weight:400;}
+.cat-header h2 em{font-style:italic;color:#B8973A;}
+.cat-header p{font-size:.7rem;color:#7A7670;margin-top:.2rem;}
+.prods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.5rem;}
+.prod-footer{display:flex;justify-content:space-between;align-items:flex-start;gap:.8rem;padding-top:.8rem;border-top:1px solid #E2DDD6;margin-top:auto;}
+.prod-prix{font-size:.88rem;font-weight:700;color:#0E1F3D;line-height:1.3;}
+.prod-prix small{display:block;font-size:.6rem;font-weight:400;color:#7A7670;margin-top:.15rem;}
+.coming{background:#F8F7F4;border:1px dashed #E2DDD6;padding:3rem;text-align:center;color:#7A7670;font-size:.82rem;}
+.coming .icon{font-size:2.5rem;opacity:.25;margin-bottom:1rem;}
+.fournisseurs{display:grid;grid-template-columns:1fr 1fr;}
+.fourn-cell{padding:4rem 3rem;}
+.fourn-cell:first-child{background:#F8F7F4;border-right:1px solid #E2DDD6;}
+.fourn-name{font-family:"Playfair Display",serif;font-size:2.2rem;font-weight:700;color:#0E1F3D;margin-bottom:.4rem;}
+.fourn-loc{font-size:.6rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#B8973A;margin-bottom:1.5rem;}
+.fourn-desc{font-size:.84rem;line-height:1.85;color:#555;margin-bottom:1.5rem;max-width:40ch;}
+.fourn-pt{display:flex;align-items:center;gap:.8rem;font-size:.76rem;color:#444;margin-bottom:.7rem;}
+.fourn-pt::before{content:"";width:1.2rem;height:1px;background:#B8973A;flex-shrink:0;}
+@media(max-width:1024px){.produits-layout{grid-template-columns:1fr;}.sidebar{position:static;display:flex;flex-wrap:wrap;gap:.3rem;padding:1.2rem;}.cat-btn{border-left:none;border-bottom:2px solid transparent;padding:.45rem .7rem;font-size:.65rem;}.cat-btn.on{border-bottom-color:#B8973A;border-left:none;}.fournisseurs{grid-template-columns:1fr;}.fourn-cell:first-child{border-right:none;border-bottom:1px solid #E2DDD6;}
+@media(max-width:768px){.prods-main{padding:1.5rem;}.prods-grid{grid-template-columns:1fr 1fr;}.fourn-cell{padding:2.5rem 1.5rem;}
+@media(max-width:480px){.prods-grid{grid-template-columns:1fr;}
+</style>
+<title>Catalogue Produits — Johns Corporate | Casablanca</title>
+<meta name="description" content="Catalogue Johns Corporate : tote bags, t-shirts, polos, casquettes, EPI. Stock immédiat Casablanca. Prix publics affichés."/>
+<meta name="keywords" content="textile publicitaire Casablanca, tote bag Maroc, t-shirt Maroc, polo corporate Maroc, Fruit of the Loom Maroc, Makito Maroc, sérigraphie Maroc"/>
+
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nb1"><span>Stock dispo · Livraison partout au Maroc</span></div>
+  <div class="nb2">
+    <div class="nb2-brand">
+      <div class="nb2-brand-name">Johns <strong>Corporate</strong></div>
+      <div class="nb2-brand-sub">Casablanca · Maroc</div>
+    </div>
+    <div class="nb2-right">
+      <a href="revendeurs.html" class="btn-rev">🔐 Espace Revendeur</a>
+      <button class="nav-toggle" id="navToggle">☰</button>
+    </div>
+  </div>
+  <div class="nb3-mobile">
+    <a href="tel:+212661218998" style="font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#d4b05a;">📱 06 61 21 89 98</a>
+    <span style="color:rgba(255,255,255,.2);">·</span>
+    <a href="tel:+212522234545" style="font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#d4b05a;">☎ 05 22 23 45 45</a>
+    <span style="color:rgba(255,255,255,.2);">|</span>
+    <a href="mailto:corpotexmaroc@gmail.com" style="font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#d4b05a;">corpotexmaroc@gmail.com</a>
+  </div>
+  <div class="nb3">
+    <div class="nb3-inner">
+      <div class="nb3-contacts">
+        <a href="tel:+212661218998" class="nb3-link">📱 06 61 21 89 98</a>
+        <span class="nb3-sep">·</span>
+        <a href="tel:+212522234545" class="nb3-link">☎ 05 22 23 45 45</a>
+        <span class="nb3-sep">|</span>
+        <a href="mailto:corpotexmaroc@gmail.com" class="nb3-link">corpotexmaroc@gmail.com</a>
+      </div>
+      <a href="devis.html" class="btn-devis">Demande de devis →</a>
+    </div>
+  </div>
+  <div class="nb4">
+    <div class="nb4-inner">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="">Accueil</a></li>
+<li><a href="produits.html" class="active">Produits</a></li>
+<li><a href="produits.html#sacs" class="">Sacs & Goodies</a></li>
+<li><a href="produits.html#textile" class="">Textile</a></li>
+<li><a href="produits.html#epi" class="">EPI</a></li>
+<li><a href="revendeurs.html" class="">Revendeurs</a></li>
+<li><a href="contact.html" class="">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div style="font-size:.62rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:#B8973A;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;"><span style="width:1.5rem;height:1px;background:#B8973A;display:inline-block;"></span>Stock disponible immédiatement</div>
+  <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);color:#fff;font-weight:400;margin-bottom:1rem;">Catalogue <em style="font-style:italic;color:#d4b05a;">complet</em></h1>
+  <p style="font-size:.9rem;color:rgba(255,255,255,.55);max-width:55ch;line-height:1.8;">Toutes nos références en stock à Casablanca. Prix publics affichés. Personnalisables avec votre logo.</p>
+</div>
+
+<div class="produits-layout">
+  <aside class="sidebar">
+    <div class="sidebar-title">Catégories</div>
+    <button class="cat-btn on" onclick="scrollTo2('#sacs',this)">Sacs & Goodies</button>
+    <button class="cat-btn" onclick="scrollTo2('#textile',this)">Textile</button>
+    <button class="cat-btn" onclick="scrollTo2('#polo',this)">Polos</button>
+    <button class="cat-btn" onclick="scrollTo2('#casquettes',this)">Casquettes</button>
+    <div class="cat-sep"></div>
+    <button class="cat-btn" onclick="scrollTo2('#epi',this)">EPI & Sécurité</button>
+    <button class="cat-btn" onclick="scrollTo2('#johns',this)">JOHN'S</button>
+    <button class="cat-btn" onclick="scrollTo2('#toges',this)">Toges & Cérémonies</button>
+    <button class="cat-btn" onclick="scrollTo2('#goodies',this)">Goodies & Accessoires</button>
+  </aside>
+  <main class="prods-main">
+
+    <div id="sacs" class="cat-section">
+      <div class="cat-header"><div><h2>Sacs & <em>Goodies</em></h2><p>Makito Espagne · Importation directe · Stock immédiat Casablanca</p></div><a href="devis.html" class="btn-outline" style="font-size:.68rem;padding:.5rem 1.2rem;">Demander un devis</a></div>
+      <div class="prods-grid"><div class="prod-card">
+<div class="prod-visual"><img src="images/trendik.jpg" alt="Tote Bag Trendik 240g" loading="lazy"/><div class="prod-ref">Réf. 1172</div><div class="prod-badge ">Produit phare</div></div>
+<div class="prod-body">
+<div class="prod-supplier">Makito Espagne</div>
+<div class="prod-name">Tote Bag Trendik 240g</div>
+<div class="prod-detail">Coton naturel 240g/m² · Poignées longues 70cm · Résistance 9kg</div>
+<p class="prod-desc">Tote bag premium coton naturel. Poignées longues renforcées, finition cousue, résistance 9kg. Qualité européenne Makito. Idéal campagnes publicitaires, événements corporate et distribution en masse.</p>
+<div class="prod-colors">🎨 Naturel / Écru (couleur unique)</div>
+<div style="font-size:.64rem;color:#7A7670;margin-bottom:.7rem;">📍 Zone : Face avant et/ou dos</div>
+<div class="prod-tags"><span class="prod-tag">Sérigraphie</span><span class="prod-tag">Transfert</span><span class="prod-tag">Broderie</span></div>
+<div class="prod-footer">
+<div style="flex:1;min-width:0;"><div class="prod-prix">18 MAD TTC<small>Prix public TTC · Stock Casablanca</small></div><div style="margin-top:.5rem;padding:.4rem .8rem;background:rgba(184,151,58,.07);border-left:2px solid #B8973A;font-size:.6rem;color:#555;">💼 <strong style="color:#0E1F3D;">Prix revendeur disponible</strong> — <a href="revendeurs.html" style="color:#B8973A;font-weight:700;white-space:nowrap;">Créer un compte →</a></div></div>
+<a href="devis.html?produit=trendik" class="btn-devis-sm" style="flex-shrink:0;align-self:flex-start;">Devis →</a>
+</div>
+</div>
+</div><div class="prod-card">
+<div class="prod-visual"><img src="images/siltex.jpg" alt="Sac Siltex 140g" loading="lazy"/><div class="prod-ref">Réf. 6048</div><div class="prod-badge ">Grand volume</div></div>
+<div class="prod-body">
+<div class="prod-supplier">Makito Espagne</div>
+<div class="prod-name">Sac Siltex 140g</div>
+<div class="prod-detail">Coton naturel 140g/m² · Poignées longues 70cm · Résistance 7kg</div>
+<p class="prod-desc">Tote bag entrée de gamme idéal grande distribution, revendeurs et fabricants locaux. Excellent rapport qualité/prix sur gros volumes. Rotation rapide.</p>
+<div class="prod-colors">🎨 Naturel / Écru (couleur unique)</div>
+<div style="font-size:.64rem;color:#7A7670;margin-bottom:.7rem;">📍 Zone : Face avant et/ou dos</div>
+<div class="prod-tags"><span class="prod-tag">Sérigraphie</span><span class="prod-tag">Transfert</span><span class="prod-tag">Broderie</span></div>
+<div class="prod-footer">
+<div style="flex:1;min-width:0;"><div class="prod-prix">13 MAD TTC<small>Prix public TTC · Stock Casablanca</small></div><div style="margin-top:.5rem;padding:.4rem .8rem;background:rgba(184,151,58,.07);border-left:2px solid #B8973A;font-size:.6rem;color:#555;">💼 <strong style="color:#0E1F3D;">Prix revendeur disponible</strong> — <a href="revendeurs.html" style="color:#B8973A;font-weight:700;white-space:nowrap;">Créer un compte →</a></div></div>
+<a href="devis.html?produit=siltex" class="btn-devis-sm" style="flex-shrink:0;align-self:flex-start;">Devis →</a>
+</div>
+</div>
+</div><div class="prod-card">
+<div class="prod-visual"><img src="images/lambur.jpg" alt="Sac à Dos Lambur RPET" loading="lazy"/><div class="prod-ref">Réf. 6430</div><div class="prod-badge green">RPET Certifié</div></div>
+<div class="prod-body">
+<div class="prod-supplier">Makito Espagne</div>
+<div class="prod-name">Sac à Dos Lambur RPET</div>
+<div class="prod-detail">Polyester RPET recyclé · Cordes autofermantes · Coins renforcés · Bagues métalliques</div>
+<p class="prod-desc">Sac à cordes RPET éco-responsable. Badge RPET certifié inclus. 13 coloris vifs. Idéal événements sportifs, goodies scolaires et distribution en masse.</p>
+<div class="prod-colors">🎨 13 coloris : Rose · Noir · Bleu ciel · Vert · Jaune · Gris · Orange · Rouge · Marine · Bleu · Blanc</div>
+<div style="font-size:.64rem;color:#7A7670;margin-bottom:.7rem;">📍 Zone : Face avant — large zone</div>
+<div class="prod-tags"><span class="prod-tag">Sérigraphie</span><span class="prod-tag">Sublimation</span><span class="prod-tag">Transfert</span></div>
+<div class="prod-footer">
+<div style="flex:1;min-width:0;"><div class="prod-prix">15 MAD TTC<small>Prix public TTC · Stock Casablanca</small></div><div style="margin-top:.5rem;padding:.4rem .8rem;background:rgba(184,151,58,.07);border-left:2px solid #B8973A;font-size:.6rem;color:#555;">💼 <strong style="color:#0E1F3D;">Prix revendeur disponible</strong> — <a href="revendeurs.html" style="color:#B8973A;font-weight:700;white-space:nowrap;">Créer un compte →</a></div></div>
+<a href="devis.html?produit=lambur" class="btn-devis-sm" style="flex-shrink:0;align-self:flex-start;">Devis →</a>
+</div>
+</div>
+</div></div>
+    </div>
+    <div id="textile" class="cat-section">
+      <div class="cat-header"><div><h2>T-Shirts <em>Fruit of the Loom</em></h2><p>Production Maroc · Accès direct usine · Livraison 48-72H</p></div><a href="devis.html" class="btn-outline" style="font-size:.68rem;padding:.5rem 1.2rem;">Demander un devis</a></div>
+      <div class="prods-grid"><div class="prod-card">
+<div class="prod-visual"><img src="images/originalt.jpg" alt="Original T 140g" loading="lazy"/><div class="prod-ref">Réf. 0610820</div><div class="prod-badge green">OEKO-TEX</div></div>
+<div class="prod-body">
+<div class="prod-supplier">Fruit of the Loom — Maroc</div>
+<div class="prod-name">Original T 140g</div>
+<div class="prod-detail">100% coton · 140/145g/m² · Fil open-end · Production zéro déchet</div>
+<p class="prod-desc">T-shirt entrée de gamme certifié OEKO-TEX STANDARD 100. Idéal impression événements et promotions grande envergure. Emballages sans plastique.</p>
+<div class="prod-colors">🎨 Blanc · Navy · Noir · Burgundy · Royal Blue · Red · Kelly Green · Fuchsia · Yellow · Azure Blue · Bottle Green · Purple · Orange · Lime · Deep Navy · Heather Grey</div>
+<div style="font-size:.64rem;color:#7A7670;margin-bottom:.7rem;">📍 Zone : Poitrine · Dos · Manches</div>
+<div class="prod-tags"><span class="prod-tag">Sérigraphie</span><span class="prod-tag">DTF</span><span class="prod-tag">Broderie</span></div>
+<div class="prod-footer">
+<div style="flex:1;min-width:0;"><div class="prod-prix">Blanc : 21 MAD · Couleur : 24 MAD<small>Prix public TTC · Stock Casablanca</small></div><div style="margin-top:.5rem;padding:.4rem .8rem;background:rgba(184,151,58,.07);border-left:2px solid #B8973A;font-size:.6rem;color:#555;">💼 <strong style="color:#0E1F3D;">Prix revendeur disponible</strong> — <a href="revendeurs.html" style="color:#B8973A;font-weight:700;white-space:nowrap;">Créer un compte →</a></div></div>
+<a href="devis.html?produit=originalt" class="btn-devis-sm" style="flex-shrink:0;align-self:flex-start;">Devis →</a>
+</div>
+</div>
+</div><div class="prod-card">
+<div class="prod-visual"><img src="images/valueweight.jpg" alt="Valueweight T 160g" loading="lazy"/><div class="prod-ref">Réf. 0610360</div><div class="prod-badge ">Best-seller</div></div>
+<div class="prod-body">
+<div class="prod-supplier">Fruit of the Loom — Maroc</div>
+<div class="prod-name">Valueweight T 160g</div>
+<div class="prod-detail">Coton · 160g/m² · Col LYCRA® · Étiquette Tear Away · Production Maroc</div>
+<p class="prod-desc">Référence textile promotionnel. Col rond LYCRA® pour maintien parfait. Maille fine pour impression haute résolution. Livraison 48-72H sans dédouanement.</p>
+<div class="prod-colors">🎨 Blanc · Noir · Navy · Burgundy · Rouge · Orange · Bottle Green · Heather Grey · Khaki · Royal Blue · Azure Blue · Deep Navy · Kelly Green · Lime · Sunflower · Fuchsia</div>
+<div style="font-size:.64rem;color:#7A7670;margin-bottom:.7rem;">📍 Zone : Poitrine · Dos · Manches</div>
+<div class="prod-tags"><span class="prod-tag">Sérigraphie</span><span class="prod-tag">DTF</span><span class="prod-tag">Broderie</span></div>
+<div class="prod-footer">
+<div style="flex:1;min-width:0;"><div class="prod-prix">Blanc : 22 MAD · Couleur : 25 MAD<small>Prix public TTC · Livraison 48-72H Maroc</small></div><div style="margin-top:.5rem;padding:.4rem .8rem;background:rgba(184,151,58,.07);border-left:2px solid #B8973A;font-size:.6rem;color:#555;">💼 <strong style="color:#0E1F3D;">Prix revendeur disponible</strong> — <a href="revendeurs.html" style="color:#B8973A;font-weight:700;white-space:nowrap;">Créer un compte →</a></div></div>
+<a href="devis.html?produit=valueweight" class="btn-devis-sm" style="flex-shrink:0;align-self:flex-start;">Devis →</a>
+</div>
+</div>
+</div><div class="prod-card">
+<div class="prod-visual"><img src="images/iconic.jpg" alt="Iconic 195g Premium" loading="lazy"/><div class="prod-ref">Réf. 0614220</div><div class="prod-badge ">Premium</div></div>
+<div class="prod-body">
+<div class="prod-supplier">Fruit of the Loom — Maroc</div>
+<div class="prod-name">Iconic 195g Premium</div>
+<div class="prod-detail">Coton peigné Ringspun 100% · 195g/m² · Col LYCRA® double piqûre · Bande épaule à épaule</div>
+<p class="prod-desc">T-shirt premium en coton peigné 100%. Toucher doux et résistant. Idéal corporate haut de gamme, hôtels, cadeaux premium.</p>
+<div class="prod-colors">🎨 Blanc · Noir · Navy · Red · Royal Blue · Burgundy · Bottle Green · Azure Blue · Deep Navy · Kelly Green · Ash · Heather Grey · Sage · Sunflower · Orange · Fuchsia · Zinc</div>
+<div style="font-size:.64rem;color:#7A7670;margin-bottom:.7rem;">📍 Zone : Poitrine · Dos · Manches</div>
+<div class="prod-tags"><span class="prod-tag">Sérigraphie</span><span class="prod-tag">DTF</span><span class="prod-tag">Broderie</span></div>
+<div class="prod-footer">
+<div style="flex:1;min-width:0;"><div class="prod-prix">Blanc : 26 MAD · Couleur : 29 MAD<small>Prix public TTC · Stock Casablanca</small></div><div style="margin-top:.5rem;padding:.4rem .8rem;background:rgba(184,151,58,.07);border-left:2px solid #B8973A;font-size:.6rem;color:#555;">💼 <strong style="color:#0E1F3D;">Prix revendeur disponible</strong> — <a href="revendeurs.html" style="color:#B8973A;font-weight:700;white-space:nowrap;">Créer un compte →</a></div></div>
+<a href="devis.html?produit=iconic" class="btn-devis-sm" style="flex-shrink:0;align-self:flex-start;">Devis →</a>
+</div>
+</div>
+</div></div>
+    </div>
+    <div id="polo" class="cat-section">
+      <div class="cat-header"><div><h2>Polos <em>Corporate</em></h2><p>Fruit of the Loom · Production Maroc · EPI & Habillage professionnel</p></div><a href="devis.html" class="btn-outline" style="font-size:.68rem;padding:.5rem 1.2rem;">Demander un devis</a></div>
+      <div class="prods-grid"><div class="prod-card">
+<div class="prod-visual"><img src="images/polo.jpg" alt="Polo Piqué 65/35" loading="lazy"/><div class="prod-ref">Réf. 0634020</div><div class="prod-badge ">EPI · Corporate</div></div>
+<div class="prod-body">
+<div class="prod-supplier">Fruit of the Loom — Maroc</div>
+<div class="prod-name">Polo Piqué 65/35</div>
+<div class="prod-detail">65% polyester / 35% coton · Tissu piqué · Patte 3 boutons ton sur ton</div>
+<p class="prod-desc">Polo corporate référence habillage professionnel. Tissu piqué facile à entretenir. Idéal restaurants, hôtellerie, retail, BTP, banques et équipes terrain.</p>
+<div class="prod-colors">🎨 Blanc · Noir · Navy · Deep Navy · Red · Orange · Bottle Green · Burgundy · Sky Blue · Heather Grey · Kelly Green · Sunflower · Royal Blue · Emerald</div>
+<div style="font-size:.64rem;color:#7A7670;margin-bottom:.7rem;">📍 Zone : Poitrine gauche · Dos</div>
+<div class="prod-tags"><span class="prod-tag">Broderie</span><span class="prod-tag">Sérigraphie</span><span class="prod-tag">Transfert</span></div>
+<div class="prod-footer">
+<div style="flex:1;min-width:0;"><div class="prod-prix">59 MAD TTC<small>Prix public TTC · Stock Casablanca</small></div><div style="margin-top:.5rem;padding:.4rem .8rem;background:rgba(184,151,58,.07);border-left:2px solid #B8973A;font-size:.6rem;color:#555;">💼 <strong style="color:#0E1F3D;">Prix revendeur disponible</strong> — <a href="revendeurs.html" style="color:#B8973A;font-weight:700;white-space:nowrap;">Créer un compte →</a></div></div>
+<a href="devis.html?produit=polo" class="btn-devis-sm" style="flex-shrink:0;align-self:flex-start;">Devis →</a>
+</div>
+</div>
+</div></div>
+    </div>
+    <div id="casquettes" class="cat-section">
+      <div class="cat-header"><div><h2>Casquettes <em>Sport</em></h2><p>Makito Espagne · 18 coloris · Stock très important</p></div><a href="devis.html" class="btn-outline" style="font-size:.68rem;padding:.5rem 1.2rem;">Demander un devis</a></div>
+      <div class="prods-grid"><div class="prod-card">
+<div class="prod-visual"><img src="images/casquette.jpg" alt="Casquette Sport 5 Panneaux" loading="lazy"/><div class="prod-ref">Réf. 8072</div><div class="prod-badge ">18 coloris</div></div>
+<div class="prod-body">
+<div class="prod-supplier">Makito Espagne</div>
+<div class="prod-name">Casquette Sport 5 Panneaux</div>
+<div class="prod-detail">5 panneaux coton · Velcro réglable · Visière et aération brodées</div>
+<p class="prod-desc">Casquette sport confortable et pratique. Fermeture velcro réglable pour ajustement universel. Idéale événements, équipes sportives, goodies et cadeaux publicitaires.</p>
+<div class="prod-colors">🎨 18 coloris : Noir · Navy · Rouge · Blanc · Rose · Bleu ciel · Vert · Jaune · Orange · Gris · Violet</div>
+<div style="font-size:.64rem;color:#7A7670;margin-bottom:.7rem;">📍 Zone : Face avant · Côtés · Dos</div>
+<div class="prod-tags"><span class="prod-tag">Broderie (recommandée)</span><span class="prod-tag">Sérigraphie</span><span class="prod-tag">Transfert</span></div>
+<div class="prod-footer">
+<div style="flex:1;min-width:0;"><div class="prod-prix">15 MAD TTC<small>Prix public TTC · Stock Casablanca</small></div><div style="margin-top:.5rem;padding:.4rem .8rem;background:rgba(184,151,58,.07);border-left:2px solid #B8973A;font-size:.6rem;color:#555;">💼 <strong style="color:#0E1F3D;">Prix revendeur disponible</strong> — <a href="revendeurs.html" style="color:#B8973A;font-weight:700;white-space:nowrap;">Créer un compte →</a></div></div>
+<a href="devis.html?produit=casquette" class="btn-devis-sm" style="flex-shrink:0;align-self:flex-start;">Devis →</a>
+</div>
+</div>
+</div></div>
+    </div>
+    <div id="epi" class="cat-section">
+      <div class="cat-header"><div><h2>EPI & Sécurité</h2><p>Delta Plus · Multimarques</p></div></div>
+      <div class="coming"><p>Gilets · Chaussures de sécurité · Casques · Lunettes · Gants · Haute visibilité<br/><br/><strong style="color:#0E1F3D;">Contactez-nous pour un devis.</strong></p><a href="devis.html" class="btn-secondary" style="margin-top:1.5rem;display:inline-flex;font-size:.7rem;padding:.7rem 1.5rem;">Demander un devis →</a></div>
+    </div>
+    <div id="johns" class="cat-section">
+      <div class="cat-header"><div><h2>JOHN'S — Vêtements de travail</h2><p>Marque propre Johns Corporate</p></div></div>
+      <div class="coming"><p>Collection JOHN'S — vêtements de travail professionnels. Catalogue disponible prochainement.<br/><br/><strong style="color:#0E1F3D;">Contactez-nous pour un devis.</strong></p><a href="devis.html" class="btn-secondary" style="margin-top:1.5rem;display:inline-flex;font-size:.7rem;padding:.7rem 1.5rem;">Demander un devis →</a></div>
+    </div>
+    <div id="toges" class="cat-section">
+      <div class="cat-header"><div><h2>Toges & Cérémonies</h2><p>Atelier Diplôme · Sur mesure</p></div></div>
+      <div class="coming"><p>Toges · Mortiers · Écharpes · Porte-diplômes pour universités et grandes écoles.<br/><br/><strong style="color:#0E1F3D;">Contactez-nous pour un devis.</strong></p><a href="devis.html" class="btn-secondary" style="margin-top:1.5rem;display:inline-flex;font-size:.7rem;padding:.7rem 1.5rem;">Demander un devis →</a></div>
+    </div>
+    <div id="goodies" class="cat-section">
+      <div class="cat-header"><div><h2>Goodies & Accessoires</h2><p>Makito · Climax · Multimarques</p></div></div>
+      <div class="coming"><p>Mugs · Stylos · Porte-clés · Tours de cou · Carnets · Gourdes<br/><br/><strong style="color:#0E1F3D;">Contactez-nous pour un devis.</strong></p><a href="devis.html" class="btn-secondary" style="margin-top:1.5rem;display:inline-flex;font-size:.7rem;padding:.7rem 1.5rem;">Demander un devis →</a></div>
+    </div>
+  </main>
+</div>
+
+<div class="fournisseurs">
+  <div class="fourn-cell">
+    <div class="fourn-name">Makito</div>
+    <div class="fourn-loc">Espagne — Importation directe</div>
+    <p class="fourn-desc">Leader européen en goodies publicitaires. Accès direct — délais réduits, prix optimisés.</p>
+    <div class="fourn-pt">Tote Bag Trendik 240g — 18 MAD TTC</div>
+    <div class="fourn-pt">Sac Siltex 140g — 13 MAD TTC</div>
+    <div class="fourn-pt">Sac à Dos Lambur RPET — 15 MAD TTC</div>
+    <div class="fourn-pt">Casquette Sport 5P — 15 MAD TTC</div>
+  </div>
+  <div class="fourn-cell">
+    <div class="fourn-name">Fruit of<br/>the Loom</div>
+    <div class="fourn-loc">Production Maroc — Accès direct usine · 48-72H</div>
+    <p class="fourn-desc">Marque mondiale, produits localement. Livraison 48-72H sur tout le Maroc.</p>
+    <div class="fourn-pt">Original T 140g — Blanc 21 MAD · Couleur 24 MAD TTC</div>
+    <div class="fourn-pt">Valueweight 160g — Blanc 22 MAD · Couleur 25 MAD TTC</div>
+    <div class="fourn-pt">Iconic 195g Premium — Blanc 26 MAD · Couleur 29 MAD TTC</div>
+    <div class="fourn-pt">Polo Piqué 65/35 — 59 MAD TTC</div>
+  </div>
+</div>
+
+<section style="background:#F8F7F4;padding:4rem 2.5rem;text-align:center;border-top:1px solid #E2DDD6;">
+  <div class="section-eyebrow">Devis gratuit sous 24H</div>
+  <h2 style="font-family:'Playfair Display',serif;font-size:2.2rem;color:#0E1F3D;margin-bottom:1.5rem;font-weight:400;">Un projet en tête ?</h2>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="devis.html" class="btn-primary">Demander un devis →</a>
+    <a href="https://wa.me/212661218998" target="_blank" class="btn-outline">💬 WhatsApp</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Johns <span>Corporate</span></div>
+      <p class="footer-desc">Textile publicitaire, goodies et EPI. Stock disponible immédiatement à Casablanca. Importateur direct.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Catalogue</div>
+      <ul class="footer-links">
+        <li><a href="produits.html#sacs">Sacs & Goodies — Makito</a></li>
+        <li><a href="produits.html#textile">Textile — Fruit of the Loom</a></li>
+        <li><a href="produits.html#epi">EPI — Delta Plus</a></li>
+        <li><a href="produits.html#johns">JOHN'S — Vêtements travail</a></li>
+        <li><a href="produits.html#toges">Toges — Atelier Diplôme</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="devis.html">Devis gratuit 24H</a></li>
+        <li><a href="revendeurs.html">Espace Revendeur</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <div class="footer-contact-item"><span>📱</span><a href="tel:+212661218998">06 61 21 89 98</a></div>
+      <div class="footer-contact-item"><span>☎</span><a href="tel:+212522234545">05 22 23 45 45</a></div>
+      <div class="footer-contact-item"><span>✉</span><a href="mailto:corpotexmaroc@gmail.com">corpotexmaroc@gmail.com</a></div>
+      <div class="footer-contact-item"><span>📍</span><span>Casablanca, Maroc</span></div>
+      <div style="margin-top:1.2rem;"><a href="devis.html" class="btn-primary" style="font-size:.68rem;padding:.55rem 1.2rem;">Devis gratuit →</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Johns Corporate SARL AU — Casablanca, Maroc</p>
+    <p class="footer-note">Règlement 100% avant livraison</p>
+  </div>
+</footer>
+<a href="https://wa.me/212661218998" target="_blank" class="wa-float">💬</a>
+<script>
+document.getElementById('navToggle').onclick = function() {
+  document.getElementById('navLinks').classList.toggle('open');
+};
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, {threshold:.07});
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script><script>
+document.getElementById('navToggle').addEventListener('click', function() {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+function scrollTo2(id, btn) {
+  document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  var el = document.querySelector(id);
+  if(el){var offset=document.getElementById('nav').offsetHeight+20;window.scrollTo({top:el.offsetTop-offset,behavior:'smooth'});}
+}
+</script>
+</body></html>
