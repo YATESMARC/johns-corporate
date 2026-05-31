@@ -1,472 +1,1542 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Johns Corporate — Textile Publicitaire & Goodies | Casablanca</title>
-<meta name="description" content="Stock immédiat Casablanca. Textile publicitaire, goodies, EPI. Importateur direct Makito & Fruit of the Loom. Devis gratuit 24H."/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Johns Corporate — Textile Publicitaire, Goodies & EPI | Casablanca</title>
+<meta name="description" content="Stock immédiat Casablanca. Textile publicitaire, goodies, EPI. Importateur direct. Devis gratuit 24H."/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
 <style>
-
+/* ═══════════════════════════════════════════
+   JOHNS CORPORATE — CHARTE V2
+   Style : Russell Europe / B2B Textile Pro
+═══════════════════════════════════════════ */
 :root {
-  --navy:#0E1F3D; --navy-deep:#091629; --navy-mid:#162d52;
-  --gold:#B8973A; --gold-light:#d4b05a;
-  --white:#FFFFFF; --off:#F5F3EF; --off2:#ECEAE4;
-  --text:#1a1a1a; --muted:#777; --border:#E0DCD4;
-  --font-serif:'Playfair Display',Georgia,serif;
-  --font-sans:'Inter',system-ui,sans-serif;
+  --navy:    #0E1F3D;
+  --navy2:   #162d52;
+  --gold:    #B8973A;
+  --gold2:   #d4b05a;
+  --white:   #FFFFFF;
+  --off:     #F8F7F4;
+  --light:   #F2F0EB;
+  --border:  #E2DDD6;
+  --text:    #1C1C1C;
+  --muted:   #7A7670;
+  --green:   #2D6A2D;
+  --font:    'Montserrat', sans-serif;
+  --serif:   'Playfair Display', serif;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{font-family:var(--font-sans);font-weight:300;color:var(--text);background:var(--white);overflow-x:hidden;line-height:1.6;}
-img{max-width:100%;height:auto;display:block;}
-a{color:inherit;text-decoration:none;transition:color .2s;}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--font); color: var(--text); background: var(--white); overflow-x: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; transition: color .2s; }
 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;font-family:var(--font-sans);font-size:.74rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;border:none;cursor:pointer;transition:all .25s;text-decoration:none;}
-.btn-primary{background:var(--gold);color:var(--navy-deep);}
-.btn-primary:hover{background:var(--gold-light);}
-.btn-secondary{background:var(--navy);color:#fff;}
-.btn-secondary:hover{background:var(--navy-mid);}
-.btn-outline{background:transparent;border:1px solid var(--navy);color:var(--navy);}
-.btn-outline:hover{background:var(--navy);color:#fff;}
-.btn-outline-white{background:transparent;border:1px solid rgba(255,255,255,.65);color:#fff;}
-.btn-outline-white:hover{background:#fff;color:var(--navy);}
-.btn-gold-outline{background:transparent;border:1px solid var(--gold);color:var(--gold);}
-.btn-gold-outline:hover{background:var(--gold);color:var(--navy-deep);}
-.btn-sm{padding:.55rem 1.3rem;font-size:.68rem;}
-.btn-lg{padding:1.05rem 2.5rem;font-size:.78rem;}
-.btn-full{width:100%;justify-content:center;}
-
-/* NAV */
-#nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:background .4s;}
-.nav-top{background:var(--navy-deep);padding:.4rem 3rem;display:flex;justify-content:space-between;align-items:center;font-size:.68rem;color:rgba(255,255,255,.55);border-bottom:1px solid rgba(184,151,58,.12);}
-.nav-top a{color:rgba(255,255,255,.55);}
-.nav-top a:hover{color:var(--gold-light);}
-.nav-main{padding:.9rem 3rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;transition:background .4s, padding .4s;}
-.nav-logo img{height:46px;width:auto;}
-.nav-logo .logo-dark{display:none;}
-.nav-links{display:flex;gap:.2rem;list-style:none;}
-.nav-links a{padding:.45rem .9rem;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);transition:color .2s;}
-.nav-links a:hover,.nav-links a.active{color:var(--gold-light);}
-.nav-actions{display:flex;align-items:center;gap:.8rem;}
-.btn-nav-rev{background:var(--gold);color:var(--navy-deep);padding:.48rem 1.2rem;font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer;animation:pulse 3s infinite;}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(184,151,58,.4);}50%{box-shadow:0 0 0 8px rgba(184,151,58,0);}}
-.nav-toggle{display:none;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;}
-
-/* SCROLLED */
-#nav.scrolled .nav-top{display:none;}
-#nav.scrolled .nav-main{background:rgba(255,255,255,.97);backdrop-filter:blur(10px);box-shadow:0 2px 20px rgba(0,0,0,.07);padding:.7rem 3rem;}
-#nav.scrolled .nav-links a{color:var(--text);}
-#nav.scrolled .nav-links a:hover{color:var(--gold);}
-#nav.scrolled .nav-logo .logo-white{display:none;}
-#nav.scrolled .nav-logo .logo-dark{display:block;}
-#nav.scrolled .nav-toggle{color:var(--navy);}
-
-/* TICKER */
-.ticker{background:var(--navy-deep);overflow:hidden;padding:.8rem 0;border-top:1px solid rgba(184,151,58,.18);}
-.ticker-track{display:flex;gap:3rem;animation:ticker 35s linear infinite;white-space:nowrap;width:max-content;}
-.ticker-item{font-size:.58rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(184,151,58,.75);}
-@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-
-/* SECTION HELPERS */
-.section{padding:6rem 3rem;}
-.section-sm{padding:4rem 3rem;}
-.container{max-width:1320px;margin:0 auto;}
-.section-label{font-size:.58rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;}
-.section-label::before{content:'';width:1.5rem;height:1px;background:var(--gold);flex-shrink:0;}
-.section-title{font-family:var(--font-serif);font-size:clamp(2rem,3.2vw,3.4rem);font-weight:400;line-height:1.1;color:var(--navy);}
-.section-title em{font-style:italic;color:var(--gold);}
-.section-title-white{color:#fff;}
-.section-title-white em{color:var(--gold-light);}
-
-/* PAGE HERO */
-.page-hero{background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 100%);padding:9rem 3rem 5rem;color:#fff;}
-.page-hero-label{font-size:.58rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;}
-.page-hero-label::before{content:'';width:1.5rem;height:1px;background:var(--gold);}
-.page-hero-title{font-family:var(--font-serif);font-size:clamp(2.5rem,5vw,5rem);color:#fff;margin-bottom:1rem;font-weight:400;line-height:1.05;}
-.page-hero-title em{font-style:italic;color:var(--gold-light);}
-.page-hero-desc{font-size:.92rem;color:rgba(255,255,255,.58);max-width:52ch;line-height:1.8;}
-
-/* PRODUIT CARD */
-.prod-card{background:var(--off);display:flex;flex-direction:column;overflow:hidden;transition:background .3s;}
-.prod-card:hover{background:var(--off2);}
-.prod-visual{position:relative;overflow:hidden;aspect-ratio:4/5;background:#f0ede8;}
-.prod-visual img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s;}
-.prod-card:hover .prod-visual img{transform:scale(1.04);}
-.prod-visual-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--navy-mid),var(--navy-deep));}
-.prod-visual-ph span{font-size:5rem;opacity:.15;}
-.prod-ref{position:absolute;top:.8rem;left:.8rem;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;background:rgba(255,255,255,.92);color:var(--navy);padding:.22rem .55rem;}
-.prod-badge{position:absolute;top:.8rem;right:.8rem;background:var(--gold);color:var(--navy-deep);font-size:.52rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .6rem;}
-.prod-badge.new{background:#1a5c1a;color:#fff;}
-.prod-info{padding:1.4rem;flex:1;display:flex;flex-direction:column;}
-.prod-supplier{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem;}
-.prod-name{font-family:var(--font-serif);font-size:1.2rem;color:var(--navy);line-height:1.2;margin-bottom:.3rem;}
-.prod-detail{font-size:.7rem;color:var(--muted);margin-bottom:.7rem;}
-.prod-desc{font-size:.76rem;color:#555;line-height:1.65;margin-bottom:.7rem;}
-.prod-colors{font-size:.68rem;color:#666;margin-bottom:.7rem;}
-.prod-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.8rem;}
-.prod-tag{font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);color:var(--muted);padding:.15rem .45rem;}
-.prod-footer{display:flex;justify-content:space-between;align-items:center;padding-top:.8rem;border-top:1px solid var(--border);margin-top:auto;}
-.prod-prix{font-family:var(--font-serif);font-size:.95rem;color:var(--navy);}
-.prod-prix small{font-family:var(--font-sans);font-size:.58rem;color:#aaa;display:block;}
-.prod-cta{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);}
-.prod-cta:hover{color:var(--navy);}
-
-/* FORMS */
-.jc-form{display:flex;flex-direction:column;gap:1rem;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-.field{display:flex;flex-direction:column;gap:.4rem;}
-.field label{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
-.field label .req{color:var(--gold);margin-left:2px;}
-.field input,.field select,.field textarea{background:#fff;border:1px solid var(--border);color:var(--text);padding:.82rem 1rem;font-family:var(--font-sans);font-size:.84rem;outline:none;transition:border-color .25s;width:100%;}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);}
-.field input::placeholder,.field textarea::placeholder{color:#bbb;}
-.field textarea{resize:vertical;min-height:105px;}
-.form-notice{background:rgba(184,151,58,.07);border-left:2px solid var(--gold);padding:.8rem 1rem;font-size:.73rem;color:#666;line-height:1.6;}
-.form-notice strong{color:var(--navy);}
-.form-success{background:#e8f5e8;border-left:3px solid #2a6a2a;padding:1rem 1.2rem;color:#1a5a1a;font-size:.82rem;display:none;margin-bottom:1rem;}
-.form-error{background:#fce8e8;border-left:3px solid #8B1A1A;padding:1rem 1.2rem;color:#8B1A1A;font-size:.82rem;display:none;margin-bottom:1rem;}
-
-/* WHATSAPP */
-.wa-float{position:fixed;bottom:2rem;right:2rem;z-index:900;width:3.2rem;height:3.2rem;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 4px 16px rgba(37,211,102,.4);animation:float-wa 3s ease-in-out infinite;text-decoration:none;}
-@keyframes float-wa{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
-
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
-
-/* FOOTER */
-footer{background:var(--navy-deep);color:#fff;padding:4rem 3rem 2rem;}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
-.footer-logo-text{font-family:var(--font-serif);font-size:1.3rem;color:#fff;opacity:.7;margin-bottom:1.2rem;}
-.footer-logo-text span{color:var(--gold);}
-.footer-desc{font-size:.76rem;color:rgba(255,255,255,.35);line-height:1.8;max-width:28ch;}
-.footer-col-title{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.3rem;}
-.footer-links{display:flex;flex-direction:column;gap:.55rem;}
-.footer-links a{font-size:.76rem;color:rgba(255,255,255,.38);transition:color .2s;}
-.footer-links a:hover{color:var(--gold-light);}
-.footer-contact a,.footer-contact span{font-size:.76rem;color:rgba(255,255,255,.38);}
-.footer-contact a:hover{color:var(--gold-light);}
-.footer-contact-item{display:flex;gap:.7rem;margin-bottom:.7rem;}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-.footer-copy{font-size:.65rem;color:rgba(255,255,255,.18);}
-
-/* RESPONSIVE */
-@media(max-width:1024px){
-  .nav-top{display:none;}
-  .nav-links{display:none;}
-  .nav-toggle{display:block;}
-  .nav-main{padding:.9rem 1.5rem;}
-  #nav.scrolled .nav-main{padding:.7rem 1.5rem;}
-  .nav-links.open{display:flex;flex-direction:column;position:fixed;inset:0;background:var(--navy-deep);z-index:999;padding:5rem 2rem 2rem;gap:0;}
-  .nav-links.open a{color:#fff;padding:1rem 0;font-size:1rem;border-bottom:1px solid rgba(255,255,255,.06);}
-  .section{padding:4rem 1.5rem;}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}
+/* ══ TOP BAR ══════════════════════════════ */
+.top-bar {
+  background: var(--navy);
+  padding: 0.6rem 0;
+  text-align: center;
+  border-bottom: 2px solid var(--gold);
 }
-@media(max-width:768px){
-  .form-row{grid-template-columns:1fr;}
-  .footer-grid{grid-template-columns:1fr;}
-  .footer-bottom{flex-direction:column;text-align:center;}
+.top-bar-inner {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold2);
 }
 
-
-/* ── HERO ── */
-.hero{min-height:100vh;display:flex;align-items:flex-end;position:relative;overflow:hidden;background:linear-gradient(150deg,#0d2245 0%,#162d52 50%,#1a3d6e 100%);}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 65% 40%,rgba(184,151,58,.1) 0%,transparent 70%);}
-.hero-img{position:absolute;right:0;bottom:0;height:92%;width:52%;object-fit:cover;object-position:top center;mask-image:linear-gradient(to left,black 55%,transparent 100%);-webkit-mask-image:linear-gradient(to left,black 55%,transparent 100%);z-index:1;}
-.hero-content{position:relative;z-index:2;padding:0 3rem 6rem;max-width:620px;}
-.hero-eyebrow{font-size:.63rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1.6rem;display:flex;align-items:center;gap:1rem;}
-.hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--gold);}
-h1.hero-title{font-family:var(--font-serif);font-size:clamp(3.2rem,6vw,7rem);font-weight:400;line-height:1.0;color:#fff;margin-bottom:1.8rem;}
-h1.hero-title em{font-style:italic;color:var(--gold-light);}
-.hero-desc{font-size:.93rem;color:rgba(255,255,255,.6);line-height:1.8;max-width:44ch;margin-bottom:2.5rem;}
-.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;}
-.hero-trust{display:flex;gap:2rem;flex-wrap:wrap;}
-.hero-trust-item{font-size:.68rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:.5rem;}
-.hero-trust-item::before{content:'✓';color:var(--gold);font-weight:700;}
-
-/* ── CATS ── */
-.cats{display:grid;grid-template-columns:repeat(6,1fr);}
-.cat{position:relative;overflow:hidden;aspect-ratio:2/3;cursor:pointer;}
-.cat-bg{position:absolute;inset:0;transition:transform .6s;}
-.cat:hover .cat-bg{transform:scale(1.06);}
-.cat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.05) 55%,transparent 100%);}
-.cat-content{position:absolute;bottom:0;left:0;right:0;padding:1.5rem 1.2rem;}
-.cat-lbl{font-size:.54rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;}
-.cat-name{font-family:var(--font-serif);font-size:1.05rem;color:#fff;line-height:1.2;}
-.cat-sub{font-size:.62rem;color:rgba(255,255,255,.4);margin-top:.2rem;}
-
-/* ── EDITORIAL ── */
-.editorial{display:grid;grid-template-columns:1fr 1fr;min-height:70vh;}
-.editorial-img{position:relative;overflow:hidden;}
-.editorial-img img{width:100%;height:100%;object-fit:cover;object-position:top center;}
-.editorial-text{background:var(--off);display:flex;flex-direction:column;justify-content:center;padding:6rem 5rem;}
-.editorial-title{font-family:var(--font-serif);font-size:clamp(2rem,2.8vw,3rem);font-weight:400;line-height:1.15;color:var(--navy);margin-bottom:1.5rem;}
-.editorial-title em{font-style:italic;color:var(--gold);}
-.editorial-body{font-size:.87rem;line-height:1.85;color:#555;margin-bottom:2.5rem;max-width:42ch;}
-
-/* ── ATOUTS ── */
-.atouts{background:var(--off);padding:6rem 3rem;}
-.atouts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3.5rem;}
-.atout{background:#fff;padding:2.5rem 2rem;border-top:3px solid transparent;transition:border-color .3s,box-shadow .3s;}
-.atout:hover{border-top-color:var(--gold);box-shadow:0 4px 24px rgba(14,31,61,.07);}
-.atout-icon{font-size:1.8rem;margin-bottom:1rem;}
-.atout-title{font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);margin-bottom:.5rem;}
-.atout-desc{font-size:.78rem;color:var(--muted);line-height:1.75;}
-
-/* ── REVENDEUR ZONE ── */
-.rev-zone{background:var(--navy);padding:6rem 3rem;}
-.rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;max-width:1100px;margin:0 auto;}
-.rev-title{font-family:var(--font-serif);font-size:clamp(2rem,3vw,3rem);color:#fff;margin-bottom:1.2rem;}
-.rev-title em{font-style:italic;color:var(--gold-light);}
-.rev-desc{font-size:.87rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:2rem;}
-.rev-avantages{display:flex;flex-direction:column;gap:.7rem;margin-bottom:2.5rem;}
-.rev-avantage{font-size:.8rem;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:.8rem;}
-.rev-avantage::before{content:'';width:1.2rem;height:1px;background:var(--gold);flex-shrink:0;}
-.rev-panel{background:rgba(255,255,255,.04);border:1px solid rgba(184,151,58,.2);padding:3rem;position:relative;}
-.rev-panel::before{content:'';position:absolute;top:1rem;right:1rem;width:2.5rem;height:2.5rem;border-top:1px solid rgba(184,151,58,.4);border-right:1px solid rgba(184,151,58,.4);}
-.rev-panel-title{font-family:var(--font-serif);font-size:1.5rem;color:#fff;margin-bottom:.5rem;}
-.rev-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0;}
-.rev-stat-num{font-family:var(--font-serif);font-size:2rem;color:var(--gold-light);}
-.rev-stat-lbl{font-size:.58rem;color:rgba(255,255,255,.32);letter-spacing:.15em;text-transform:uppercase;margin-top:.2rem;}
-
-/* ── PERSO ── */
-.perso-section{background:var(--navy-deep);padding:6rem 3rem;}
-.perso-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:4rem;}
-.perso-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);padding:3rem 2.5rem;transition:background .3s;}
-.perso-card:hover{background:rgba(184,151,58,.06);}
-.perso-num{font-size:.68rem;color:var(--gold);letter-spacing:.2em;margin-bottom:1.5rem;}
-.perso-icon{font-size:2rem;margin-bottom:1.2rem;opacity:.7;}
-.perso-title{font-family:var(--font-serif);font-size:1.55rem;color:#fff;margin-bottom:.8rem;}
-.perso-desc{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.8;}
-
-/* ── CTA FINAL ── */
-.cta-section{background:var(--off);padding:6rem 3rem;text-align:center;}
-.cta-section h2{font-family:var(--font-serif);font-size:clamp(2rem,3vw,3rem);color:var(--navy);margin-bottom:1.5rem;}
-.cta-section h2 em{font-style:italic;color:var(--gold);}
-.cta-section p{font-size:.88rem;color:var(--muted);max-width:50ch;margin:0 auto 2.5rem;line-height:1.8;}
-.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
-
-/* RESPONSIVE */
-@media(max-width:1024px){
-  .cats{grid-template-columns:repeat(3,1fr);}
-  .editorial{grid-template-columns:1fr;}
-  .editorial-img{height:55vw;}
-  .editorial-text{padding:4rem 2.5rem;}
-  .atouts-grid{grid-template-columns:1fr 1fr;}
-  .rev-grid{grid-template-columns:1fr;gap:3rem;}
-  .perso-grid{grid-template-columns:1fr;}
+/* ══ NAV ══════════════════════════════════ */
+#nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
-@media(max-width:640px){
-  .cats{grid-template-columns:repeat(2,1fr);}
-  .hero-content{padding:0 1.5rem 4rem;}
-  .atouts-grid{grid-template-columns:1fr;}
-  .atouts,.rev-zone,.perso-section,.cta-section{padding:4rem 1.5rem;}
+
+/* ── Ligne 1 : navy foncé — logo + actions ── */
+.nav-row1 {
+  background: #0a1628;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  gap: 2rem;
+}
+.nav-brand {
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  color: var(--white);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.nav-brand strong { color: var(--gold); font-style: italic; }
+.nav-brand small {
+  display: block;
+  font-family: var(--font);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: -2px;
+}
+.nav-row1-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.nav-contact-info {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.45);
+  margin-right: 0.5rem;
+}
+.nav-contact-info a { color: rgba(255,255,255,0.45); transition: color .2s; }
+.nav-contact-info a:hover { color: var(--gold2); }
+.nav-contact-sep { color: rgba(255,255,255,0.15); }
+
+/* ── Ligne 2 : gris clair — navigation ── */
+.nav-row2 {
+  background: #F0EEE9;
+  border-bottom: 1px solid #D8D4CC;
+}
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+}
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 0;
+  height: 48px;
+}
+.nav-links li a {
+  display: flex;
+  align-items: center;
+  padding: 0 1.1rem;
+  height: 48px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #3a3a3a;
+  border-bottom: 3px solid transparent;
+  transition: color .2s, border-color .2s;
+  white-space: nowrap;
+}
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: var(--navy);
+  border-bottom-color: var(--gold);
+}
+.nav-row2-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+.nav-stock-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  white-space: nowrap;
+  border-left: 1px solid #D8D4CC;
+  padding-left: 1rem;
+}
+.nav-stock-info a {
+  color: var(--gold);
+  font-weight: 700;
+  transition: color .2s;
+}
+.nav-stock-info a:hover { color: var(--navy); }
+.nav-stock-dot {
+  width: 7px;
+  height: 7px;
+  background: #2a9a2a;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+.nav-stock-sep { color: #D8D4CC; margin: 0 0.2rem; }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
+}
+
+/* WhatsApp button — très visible */
+.btn-wa {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #25D366;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+  white-space: nowrap;
+}
+.btn-wa:hover { background: #1da850; }
+.btn-wa .wa-icon { font-size: 1rem; }
+
+.btn-devis {
+  background: var(--gold);
+  color: var(--navy);
+  padding: 0.6rem 1.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+  white-space: nowrap;
+}
+.btn-devis:hover { background: var(--gold2); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--navy);
+  padding: 0.3rem;
+}
+.btn-revendeur-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(184,151,58,0.5);
+  color: var(--gold2);
+  padding: 0.5rem 1.1rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.btn-revendeur-nav:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--navy);
+}
+
+/* ══ HERO SLIDER ══════════════════════════ */
+.hero {
+  position: relative;
+  height: 75vh;
+  min-height: 500px;
+  max-height: 700px;
+  overflow: hidden;
+  background: var(--navy);
+  border-top: 3px solid var(--gold);
+}
+.slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.77,0,0.18,1);
+}
+.slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.slide-bg {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: top center;
+  width: 100%;
+  height: 100%;
+  opacity: 0.35;
+}
+.slide-color {
+  position: absolute;
+  inset: 0;
+}
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(14,31,61,0.92) 0%, rgba(14,31,61,0.5) 55%, transparent 100%);
+}
+.slide-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 6rem;
+  max-width: 680px;
+}
+.slide-label {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  margin-bottom: 1.5rem;
+}
+.slide-title {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 1.2rem;
+  font-weight: 400;
+}
+.slide-title em { font-style: italic; color: var(--gold2); }
+.slide-desc {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+  max-width: 44ch;
+}
+.slide-ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.btn-white {
+  background: var(--white);
+  color: var(--navy);
+  padding: 0.85rem 2rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+}
+.btn-white:hover { background: var(--off); }
+.btn-outline-white {
+  background: transparent;
+  color: var(--white);
+  padding: 0.85rem 2rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-outline-white:hover { background: var(--white); color: var(--navy); }
+
+/* Slider controls */
+.slide-dots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.6rem;
+  z-index: 10;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  background: rgba(255,255,255,0.35);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background .3s, transform .3s;
+  border: none;
+}
+.dot.active { background: var(--gold); transform: scale(1.3); }
+.slide-arrows {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 10;
+  pointer-events: none;
+}
+.arrow {
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background .2s;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.arrow:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+
+/* ══ TICKER ═══════════════════════════════ */
+.ticker {
+  background: var(--navy);
+  padding: 0.7rem 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.ticker-track {
+  display: flex;
+  gap: 0;
+  animation: ticker 40s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+.ticker-item {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(184,151,58,0.75);
+  padding: 0 2.5rem;
+  border-right: 1px solid rgba(184,151,58,0.2);
+}
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ══ FAMILLES ═════════════════════════════ */
+.familles {
+  background: var(--white);
+  padding: 5rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.section-eyebrow {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  color: var(--navy);
+  font-weight: 400;
+}
+.section-title em { font-style: italic; color: var(--gold); }
+.section-line {
+  width: 50px;
+  height: 2px;
+  background: var(--gold);
+  margin: 1rem auto 0;
+}
+
+.familles-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+.famille-card {
+  border: 1px solid var(--border);
+  background: var(--white);
+  transition: border-color .3s, box-shadow .3s, transform .3s;
+  cursor: pointer;
+  overflow: hidden;
+}
+.famille-card:hover {
+  border-color: var(--navy);
+  box-shadow: 0 8px 32px rgba(14,31,61,0.1);
+  transform: translateY(-3px);
+}
+.famille-img {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.famille-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform .5s;
+}
+.famille-card:hover .famille-img img { transform: scale(1.05); }
+.famille-icon-placeholder {
+  font-size: 4rem;
+  opacity: 0.15;
+}
+.famille-info {
+  padding: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+.famille-marque {
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+.famille-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.2rem;
+}
+.famille-sub {
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+.famille-arrow {
+  font-size: 0.7rem;
+  color: var(--gold);
+  margin-top: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+/* ══ PRODUITS ═════════════════════════════ */
+.produits-section {
+  background: var(--off);
+  padding: 5rem 2rem;
+}
+.produits-inner { max-width: 1400px; margin: 0 auto; }
+
+.produits-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 3rem;
+  border-bottom: 2px solid var(--border);
+  overflow-x: auto;
+}
+.produits-tab {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  padding: 0.8rem 1.6rem;
+  font-family: var(--font);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.produits-tab:hover { color: var(--navy); }
+.produits-tab.active { color: var(--navy); border-bottom-color: var(--gold); }
+
+.produits-panel { display: none; }
+.produits-panel.active {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Product card — encadré, propre */
+.prod-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: border-color .3s, box-shadow .3s, transform .3s;
+}
+.prod-card:hover {
+  border-color: var(--navy);
+  box-shadow: 0 6px 24px rgba(14,31,61,0.1);
+  transform: translateY(-2px);
+}
+.prod-visual {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: var(--light);
+}
+.prod-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform .5s;
+}
+.prod-card:hover .prod-visual img { transform: scale(1.04); }
+.prod-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  opacity: 0.12;
+  background: linear-gradient(135deg, var(--navy2), var(--navy));
+}
+.prod-ref {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
+  background: rgba(255,255,255,0.95);
+  color: var(--navy);
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.55rem;
+  border: 1px solid var(--border);
+}
+.prod-badge {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+}
+.prod-badge.green { background: var(--green); color: #fff; }
+
+.prod-body {
+  padding: 1.2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+.prod-supplier {
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+.prod-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+.prod-detail {
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-bottom: 0.7rem;
+  line-height: 1.5;
+}
+.prod-desc {
+  font-size: 0.74rem;
+  color: #555;
+  line-height: 1.65;
+  margin-bottom: 0.7rem;
+}
+.prod-colors {
+  font-size: 0.66rem;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+.prod-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+.prod-tag {
+  font-size: 0.54rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  color: var(--navy);
+  padding: 0.18rem 0.5rem;
+  background: var(--off);
+}
+.prod-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+.prod-prix {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.prod-prix small {
+  font-size: 0.58rem;
+  font-weight: 400;
+  color: var(--muted);
+  display: block;
+}
+.btn-devis-sm {
+  background: var(--navy);
+  color: var(--white);
+  padding: 0.45rem 1rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+  white-space: nowrap;
+}
+.btn-devis-sm:hover { background: var(--gold); color: var(--navy); }
+
+/* ══ ATOUTS ═══════════════════════════════ */
+.atouts {
+  background: var(--white);
+  padding: 5rem 2rem;
+}
+.atouts-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.atouts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  margin-top: 3.5rem;
+}
+.atout {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background .2s;
+}
+.atout:hover { background: var(--off); }
+.atout:nth-child(3n) { border-right: none; }
+.atout:nth-child(4), .atout:nth-child(5), .atout:nth-child(6) { border-bottom: none; }
+.atout-num {
+  font-family: var(--serif);
+  font-size: 2.5rem;
+  color: rgba(14,31,61,0.08);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.atout-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 0.6rem;
+}
+.atout-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* ══ ZONE REVENDEUR ═══════════════════════ */
+.revendeur-zone {
+  background: var(--navy);
+  padding: 5rem 2rem;
+}
+.revendeur-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+.rev-eyebrow {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.rev-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  color: var(--white);
+  font-weight: 400;
+  margin-bottom: 1.2rem;
+}
+.rev-title em { font-style: italic; color: var(--gold2); }
+.rev-desc {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  max-width: 55ch;
+  margin: 0 auto 2.5rem;
+}
+.rev-avantages {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+.rev-avantage {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.rev-avantage::before {
+  content: '';
+  width: 1rem;
+  height: 1px;
+  background: var(--gold);
+}
+.rev-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--navy);
+  padding: 0.9rem 2.2rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+}
+.btn-gold:hover { background: var(--gold2); }
+.btn-outline-gold {
+  background: transparent;
+  color: var(--gold);
+  padding: 0.9rem 2.2rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--gold);
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-outline-gold:hover { background: var(--gold); color: var(--navy); }
+
+/* ══ CTA DEVIS ════════════════════════════ */
+.cta-devis {
+  background: var(--off);
+  padding: 5rem 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.cta-title {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  color: var(--navy);
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.cta-title em { font-style: italic; color: var(--gold); }
+.cta-desc {
+  font-size: 0.86rem;
+  color: var(--muted);
+  max-width: 50ch;
+  margin: 0 auto 2.5rem;
+  line-height: 1.8;
+}
+.cta-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-navy {
+  background: var(--navy);
+  color: var(--white);
+  padding: 0.9rem 2.2rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+}
+.btn-navy:hover { background: var(--navy2); }
+.btn-outline-navy {
+  background: transparent;
+  color: var(--navy);
+  padding: 0.9rem 2.2rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--navy);
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-outline-navy:hover { background: var(--navy); color: #fff; }
+
+/* ══ FOOTER ═══════════════════════════════ */
+footer {
+  background: var(--navy);
+  color: var(--white);
+  padding: 4rem 2rem 2rem;
+}
+.footer-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 2rem;
+}
+.footer-brand-name {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.footer-brand-name span { color: var(--gold); font-style: italic; }
+.footer-desc {
+  font-size: 0.76rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.8;
+  max-width: 30ch;
+  margin-bottom: 1.5rem;
+}
+.footer-col-title {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+.footer-links { display: flex; flex-direction: column; gap: 0.55rem; }
+.footer-links a {
+  font-size: 0.76rem;
+  color: rgba(255,255,255,0.38);
+  transition: color .2s;
+}
+.footer-links a:hover { color: var(--gold2); }
+.footer-contact-item {
+  display: flex;
+  gap: 0.7rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.38);
+  align-items: flex-start;
+}
+.footer-contact-item a { color: rgba(255,255,255,0.38); }
+.footer-contact-item a:hover { color: var(--gold2); }
+.footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-copy { font-size: 0.65rem; color: rgba(255,255,255,0.18); }
+.footer-note { font-size: 0.65rem; color: rgba(184,151,58,0.4); }
+
+/* ══ WA FLOAT ═════════════════════════════ */
+.wa-float {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 900;
+  background: #25D366;
+  color: #fff;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+  animation: float-wa 3s ease-in-out infinite;
+  text-decoration: none;
+}
+@keyframes float-wa { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
+.wa-float-label {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 5.5rem;
+  z-index: 900;
+  background: #25D366;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+  animation: float-wa 3s ease-in-out infinite;
+  text-decoration: none;
+}
+
+/* ══ REVEAL ═══════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ══ RESPONSIVE ═══════════════════════════ */
+@media(max-width:1200px) {
+  .familles-grid { grid-template-columns: repeat(3, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media(max-width:1024px) {
+  .nav-contact-info { display: none; }
+  .nav-links { display: none; }
+  #navToggle { display: block !important; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    background: var(--white);
+    z-index: 999;
+    padding: 5rem 2rem 2rem;
+    gap: 0;
+    overflow-y: auto;
+  }
+  .nav-links.open li a {
+    height: auto;
+    line-height: 1.4;
+    padding: 1rem 0;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--border);
+    border-left: none;
+  }
+  .familles-grid { grid-template-columns: repeat(2, 1fr); }
+  .atouts-grid { grid-template-columns: 1fr 1fr; }
+  .atout:nth-child(3n) { border-right: 1px solid var(--border); }
+  .atout:nth-child(2n) { border-right: none; }
+}
+@media(max-width:768px) {
+  .slide-content { padding: 0 2rem; }
+  .familles-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .atouts-grid { grid-template-columns: 1fr; }
+  .atout { border-right: none !important; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .rev-avantages { flex-direction: column; gap: 1rem; align-items: center; }
+  .wa-float-label { display: none; }
+  .hero { height: 80vw; min-height: 400px; }
+}
+@media(max-width:480px) {
+  .familles-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+  .produits-panel.active { grid-template-columns: 1fr 1fr; }
+  .cta-btns,.slide-ctas,.rev-btns { flex-direction: column; align-items: center; }
 }
 </style>
 </head>
 <body>
 
-
+<!-- NAV -->
 <nav id="nav">
-  <div class="nav-top">
-    <span>📍 Casablanca · Stock disponible immédiatement</span>
-    <span><a href="mailto:corpotexmaroc@gmail.com">corpotexmaroc@gmail.com</a></span>
-  </div>
-  <div class="nav-main">
-    <div class="nav-logo">
-      <a href="index.html" style="font-family:Playfair Display,serif;font-size:1.3rem;color:#fff;font-weight:400;letter-spacing:.05em;text-decoration:none;">Johns <strong style="color:#B8973A;">Corporate</strong></a>
-    </div>
-    <ul class="nav-links" id="navLinks"><li><a href="index.html" class="active">Accueil</a></li><li><a href="produits.html" class="">Produits</a></li><li><a href="contact.html" class="">Contact</a></li><li><a href="devis.html" class="">Devis</a></li></ul>
-    <div class="nav-actions">
-      <a href="devis.html" class="btn btn-outline-white btn-sm">Devis gratuit</a>
-      <a href="crm.html" class="btn-nav-rev" style="background:var(--gold);color:var(--navy-deep);padding:.48rem 1.2rem;font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;">Espace Revendeur</a>
-      <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
-    </div>
-  </div>
-</nav>
-<div style="height:0px;"></div>
 
-<!-- HERO -->
-<section class="hero">
-  <img class="hero-img" src="images/polo.jpg" alt="Polo Johns Corporate"/>
-  <div class="hero-content">
-    <div class="hero-eyebrow">Casablanca · Maroc · Importateur direct</div>
-    <h1 class="hero-title">Stock disponible<br/><em>immédiatement</em><br/>à Casablanca.</h1>
-    <p class="hero-desc">Sacs, textile publicitaire, casquettes, goodies et EPI. Prix fixes. Livraison rapide partout au Maroc.</p>
-    <div class="hero-ctas">
-      <a href="produits.html" class="btn btn-primary btn-lg">Voir le catalogue</a>
-      <a href="devis.html" class="btn btn-outline-white btn-lg">Devis gratuit 24H</a>
-      <a href="revendeurs.html" class="btn btn-gold-outline btn-lg">Devenir revendeur</a>
+  <!-- Ligne 1 : Navy foncé — Logo + Contact + Actions -->
+  <div class="nav-row1">
+    <div class="nav-brand">
+      Johns <strong>Corporate</strong>
+      <small>Casablanca · Maroc</small>
     </div>
-    <div class="hero-trust">
-      <span class="hero-trust-item">Stock immédiat Casablanca</span>
-      <span class="hero-trust-item">Prix importateur direct</span>
-      <span class="hero-trust-item">Livraison 48-72H</span>
-      <span class="hero-trust-item">Devis sous 24H</span>
+    <div class="nav-row1-right">
+      <div class="nav-contact-info">
+        <a href="mailto:corpotexmaroc@gmail.com">corpotexmaroc@gmail.com</a>
+        <span class="nav-contact-sep">|</span>
+        <a href="https://wa.me/212661218998" target="_blank">+212 6XX XXX XXX</a>
+      </div>
+      <a href="revendeurs.html" class="btn-revendeur-nav">
+        🔐 Espace Revendeur
+      </a>
+      <button class="nav-toggle" id="navToggle" style="background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer;display:none;">☰</button>
+    </div>
+  </div>
+
+  <!-- Ligne 2 : Gris clair — Navigation + Devis -->
+  <div class="nav-row2">
+    <div class="nav-inner">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Accueil</a></li>
+        <li><a href="produits.html">Produits</a></li>
+        <li><a href="produits.html#sacs">Sacs & Goodies</a></li>
+        <li><a href="produits.html#textile">Textile</a></li>
+        <li><a href="produits.html#epi">EPI</a></li>
+        <li><a href="revendeurs.html">Revendeurs</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-row2-right">
+        <div class="nav-stock-info">
+          <span class="nav-stock-dot"></span>
+          Stock dispo · Livraison partout au Maroc
+          <span class="nav-stock-sep">|</span>
+          <a href="tel:+212661218998">📱 06 61 21 89 98</a>
+          <span class="nav-stock-sep">·</span>
+          <a href="tel:+212522234545">☎ 05 22 23 45 45</a>
+        </div>
+        <a href="devis.html" class="btn-devis">Devis gratuit →</a>
+      </div>
+    </div>
+  </div>
+
+</nav>
+
+<!-- HERO SLIDER -->
+<section class="hero" id="hero">
+  <div class="slides" id="slides">
+
+    <!-- Slide 1 — Textile -->
+    <div class="slide">
+      <img class="slide-bg" src="images/polo.jpg" alt="Polo Johns Corporate"/>
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <span class="slide-label">Fruit of the Loom — Production Maroc</span>
+        <h1 class="slide-title">Textile <em>publicitaire</em><br/>dès 21 MAD TTC</h1>
+        <p class="slide-desc">T-shirts, polos, sweats. Stock immédiat à Casablanca. Accès direct usine — livraison 48-72H partout au Maroc.</p>
+        <div class="slide-ctas">
+          <a href="produits.html#textile" class="btn-white">Voir le textile</a>
+          <a href="devis.html" class="btn-outline-white">Devis gratuit</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 — Sacs -->
+    <div class="slide">
+      <img class="slide-bg" src="images/trendik.jpg" alt="Tote Bag Trendik"/>
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <span class="slide-label">Makito Espagne — Importation directe</span>
+        <h1 class="slide-title">Sacs & <em>Goodies</em><br/>premium</h1>
+        <p class="slide-desc">Tote bags, sacs à dos RPET, casquettes. Qualité européenne, prix importateur direct. Personnalisables avec votre logo.</p>
+        <div class="slide-ctas">
+          <a href="produits.html#sacs" class="btn-white">Voir les sacs</a>
+          <a href="devis.html" class="btn-outline-white">Devis gratuit</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 — EPI -->
+    <div class="slide">
+      <div class="slide-color" style="background:linear-gradient(135deg,#1a2f50,#0e1f3d);"></div>
+      <div class="slide-overlay" style="background:none;"></div>
+      <div class="slide-content">
+        <span class="slide-label">Delta Plus — EPI & Sécurité</span>
+        <h1 class="slide-title">EPI & Vêtements<br/><em>de travail</em></h1>
+        <p class="slide-desc">Équipements de protection individuelle. Gilets, chaussures de sécurité, casques, gants. Certifiés normes européennes.</p>
+        <div class="slide-ctas">
+          <a href="produits.html#epi" class="btn-white">Voir l'EPI</a>
+          <a href="devis.html" class="btn-outline-white">Devis gratuit</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4 — Toges -->
+    <div class="slide">
+      <div class="slide-color" style="background:linear-gradient(135deg,#2f1a4a,#1a0e2f);"></div>
+      <div class="slide-overlay" style="background:none;"></div>
+      <div class="slide-content">
+        <span class="slide-label">Atelier Diplôme — Cérémonies</span>
+        <h1 class="slide-title">Toges <em>universitaires</em><br/>sur mesure</h1>
+        <p class="slide-desc">Toges, mortiers, écharpes, porte-diplômes. Pour universités, grandes écoles et associations. Sur mesure et sur devis.</p>
+        <div class="slide-ctas">
+          <a href="produits.html#toges" class="btn-white">Voir les toges</a>
+          <a href="devis.html" class="btn-outline-white">Devis gratuit</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Arrows -->
+  <div class="slide-arrows">
+    <button class="arrow" onclick="prevSlide()">&#8592;</button>
+    <button class="arrow" onclick="nextSlide()">&#8594;</button>
+  </div>
+
+  <!-- Dots -->
+  <div class="slide-dots" id="slideDots"></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" style="border-top:none;">
+  <div class="ticker-track">
+    <span class="ticker-item">Stock disponible immédiatement à Casablanca</span>
+    <span class="ticker-item">Sérigraphie</span>
+    <span class="ticker-item">DTF</span>
+    <span class="ticker-item">Broderie</span>
+    <span class="ticker-item">Stock immédiat Casablanca</span>
+    <span class="ticker-item">Importateur direct</span>
+    <span class="ticker-item">Fruit of the Loom Maroc</span>
+    <span class="ticker-item">Makito Espagne</span>
+    <span class="ticker-item">Delta Plus EPI</span>
+    <span class="ticker-item">Devis gratuit 24H</span>
+    <span class="ticker-item">Livraison tout le Maroc</span>
+    <span class="ticker-item">Sérigraphie</span>
+    <span class="ticker-item">DTF</span>
+    <span class="ticker-item">Broderie</span>
+    <span class="ticker-item">Stock immédiat Casablanca</span>
+    <span class="ticker-item">Importateur direct</span>
+    <span class="ticker-item">Fruit of the Loom Maroc</span>
+    <span class="ticker-item">Makito Espagne</span>
+    <span class="ticker-item">Delta Plus EPI</span>
+    <span class="ticker-item">Devis gratuit 24H</span>
+    <span class="ticker-item">Livraison tout le Maroc</span>
+  </div>
+</div>
+
+<!-- FAMILLES -->
+<section class="familles">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Nos gammes</div>
+    <h2 class="section-title">Familles de <em>produits</em></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="familles-grid">
+
+    <div class="famille-card reveal reveal-delay-1" onclick="location.href='produits.html#sacs'">
+      <div class="famille-img">
+        <img src="images/trendik.jpg" alt="Sacs Goodies Makito"/>
+      </div>
+      <div class="famille-info">
+        <div class="famille-marque">Makito Espagne</div>
+        <div class="famille-name">Sacs & Goodies</div>
+        <div class="famille-sub">Tote bags · Sacs à dos · Casquettes</div>
+        <div class="famille-arrow">Voir la gamme →</div>
+      </div>
+    </div>
+
+    <div class="famille-card reveal reveal-delay-2" onclick="location.href='produits.html#textile'">
+      <div class="famille-img">
+        <img src="images/polo.jpg" alt="Textile Fruit of the Loom"/>
+      </div>
+      <div class="famille-info">
+        <div class="famille-marque">Fruit of the Loom Europe</div>
+        <div class="famille-name">Textile</div>
+        <div class="famille-sub">T-shirts · Polos · Sweats · Hoodies</div>
+        <div class="famille-arrow">Voir la gamme →</div>
+      </div>
+    </div>
+
+    <div class="famille-card reveal reveal-delay-3" onclick="location.href='produits.html#epi'">
+      <div class="famille-img" style="background:linear-gradient(135deg,#1a2f50,#0e1f3d);">
+        <div class="famille-icon-placeholder">🦺</div>
+      </div>
+      <div class="famille-info">
+        <div class="famille-marque">Delta Plus</div>
+        <div class="famille-name">EPI</div>
+        <div class="famille-sub">Gilets · Chaussures · Casques · Gants</div>
+        <div class="famille-arrow">Voir la gamme →</div>
+      </div>
+    </div>
+
+    <div class="famille-card reveal reveal-delay-1" onclick="location.href='produits.html#johns'">
+      <div class="famille-img" style="background:linear-gradient(135deg,#162d52,#0e1f3d);">
+        <div class="famille-icon-placeholder">👔</div>
+      </div>
+      <div class="famille-info">
+        <div class="famille-marque">Marque propre</div>
+        <div class="famille-name">JOHN'S</div>
+        <div class="famille-sub">Vêtements de travail</div>
+        <div class="famille-arrow">Voir la gamme →</div>
+      </div>
+    </div>
+
+    <div class="famille-card reveal reveal-delay-2" onclick="location.href='produits.html#toges'">
+      <div class="famille-img" style="background:linear-gradient(135deg,#2f1a4a,#1a0e2f);">
+        <div class="famille-icon-placeholder">🎓</div>
+      </div>
+      <div class="famille-info">
+        <div class="famille-marque">Atelier Diplôme</div>
+        <div class="famille-name">Toges & Cérémonies</div>
+        <div class="famille-sub">Toges · Mortiers · Écharpes · Porte-diplômes</div>
+        <div class="famille-arrow">Voir la gamme →</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRODUITS PHARES -->
+<section class="produits-section">
+  <div class="produits-inner">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">En stock · Prix publics</div>
+      <h2 class="section-title">Produits <em>phares</em></h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="produits-tabs">
+      <button class="produits-tab active" onclick="showTab('sacs',this)">Sacs & Goodies</button>
+      <button class="produits-tab" onclick="showTab('textile',this)">Textile</button>
+      <button class="produits-tab" onclick="showTab('polo-tab',this)">Polos</button>
+    </div>
+
+    <!-- SACS -->
+    <div class="produits-panel active" id="tab-sacs">
+      <div class="prod-card reveal">
+        <div class="prod-visual">
+          <img src="images/trendik.jpg" alt="Tote Bag Trendik 240g"/>
+          <div class="prod-ref">Réf. 1172</div>
+          <div class="prod-badge">Produit phare</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-supplier">Makito Espagne</div>
+          <div class="prod-name">Tote Bag Trendik 240g</div>
+          <div class="prod-detail">Coton naturel 240g/m² · Poignées 70cm · Résistance 9kg</div>
+          <p class="prod-desc">Tote bag premium qualité européenne. Idéal campagnes publicitaires et événements corporate.</p>
+          <div class="prod-colors">Naturel / Écru · Personnalisable face avant & dos</div>
+          <div class="prod-tags"><span class="prod-tag">Sérigraphie</span><span class="prod-tag">Broderie</span><span class="prod-tag">Transfert</span></div>
+          <div class="prod-footer">
+            <div class="prod-prix">Sur devis<small>dès 50 pcs</small></div>
+            <a href="devis.html" class="btn-devis-sm">Devis →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card reveal">
+        <div class="prod-visual">
+          <img src="images/siltex.jpg" alt="Sac Siltex 140g"/>
+          <div class="prod-ref">Réf. 6048</div>
+          <div class="prod-badge">Grand volume</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-supplier">Makito Espagne</div>
+          <div class="prod-name">Sac Siltex 140g</div>
+          <div class="prod-detail">Coton naturel 140g/m² · Poignées 70cm · Résistance 7kg</div>
+          <p class="prod-desc">Excellent rapport qualité/prix pour gros volumes. Idéal grande distribution et promotions massives.</p>
+          <div class="prod-colors">Naturel / Écru · Zone : face avant & dos</div>
+          <div class="prod-tags"><span class="prod-tag">Sérigraphie</span><span class="prod-tag">DTF</span><span class="prod-tag">Broderie</span></div>
+          <div class="prod-footer">
+            <div class="prod-prix">Sur devis<small>gros volumes</small></div>
+            <a href="devis.html" class="btn-devis-sm">Devis →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card reveal">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#1a2f50,#0e1f3d);">
+          <div class="prod-placeholder">🎒</div>
+          <div class="prod-ref">Réf. 6430</div>
+          <div class="prod-badge green">RPET Certifié</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-supplier">Makito Espagne</div>
+          <div class="prod-name">Sac à Dos Lambur RPET</div>
+          <div class="prod-detail">Polyester RPET recyclé · Cordes autofermantes · Coins renforcés</div>
+          <p class="prod-desc">Sac à cordes éco-responsable, bagues métalliques. Badge RPET certifié. Argument écologique fort.</p>
+          <div class="prod-colors">13 coloris : Noir · Marine · Rouge · Vert · Bleu · Orange…</div>
+          <div class="prod-tags"><span class="prod-tag">RPET</span><span class="prod-tag">Sérigraphie</span><span class="prod-tag">Sublimation</span></div>
+          <div class="prod-footer">
+            <div class="prod-prix">Sur devis<small>plastique recyclé</small></div>
+            <a href="devis.html" class="btn-devis-sm">Devis →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEXTILE -->
+    <div class="produits-panel" id="tab-textile">
+      <div class="prod-card reveal">
+        <div class="prod-visual">
+          <img src="images/valueweight.jpg" alt="T-Shirt Valueweight 160g"/>
+          <div class="prod-ref">Réf. 0610360</div>
+          <div class="prod-badge">Best-seller</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-supplier">Fruit of the Loom — Maroc</div>
+          <div class="prod-name">T-Shirt Valueweight 160g</div>
+          <div class="prod-detail">Coton · 160g/m² · Col LYCRA® · Tear Away</div>
+          <p class="prod-desc">La référence textile promotionnel. Maille fine haute résolution. Production Maroc, livraison 48-72H.</p>
+          <div class="prod-colors">20+ coloris : Blanc · Noir · Navy · Burgundy · Khaki…</div>
+          <div class="prod-tags"><span class="prod-tag">Usine Maroc</span><span class="prod-tag">48-72H</span><span class="prod-tag">DTF</span><span class="prod-tag">Sérigraphie</span></div>
+          <div class="prod-footer">
+            <div class="prod-prix">30 MAD TTC<small>toutes couleurs</small></div>
+            <a href="devis.html" class="btn-devis-sm">Devis →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card reveal">
+        <div class="prod-visual">
+          <img src="images/iconic.jpg" alt="T-Shirt Iconic 195g"/>
+          <div class="prod-ref">Réf. 0614220</div>
+          <div class="prod-badge">Premium</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-supplier">Fruit of the Loom — Maroc</div>
+          <div class="prod-name">T-Shirt Iconic 195g Premium</div>
+          <div class="prod-detail">Coton peigné Ringspun 100% · 195g/m² · Col LYCRA®</div>
+          <p class="prod-desc">T-shirt haut de gamme, toucher doux et résistant. Idéal corporate, hôtels, cadeaux premium.</p>
+          <div class="prod-colors">19 coloris : Blanc · Noir · Navy · Red · Ash · Sage…</div>
+          <div class="prod-tags"><span class="prod-tag">Premium</span><span class="prod-tag">Broderie</span><span class="prod-tag">Corporate</span></div>
+          <div class="prod-footer">
+            <div class="prod-prix">34–40 MAD TTC<small>blanc / couleurs</small></div>
+            <a href="devis.html" class="btn-devis-sm">Devis →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card reveal">
+        <div class="prod-visual" style="background:linear-gradient(135deg,#1a2f50,#0e1f3d);">
+          <div class="prod-placeholder">👕</div>
+          <div class="prod-ref">Réf. 0610820</div>
+          <div class="prod-badge green">OEKO-TEX</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-supplier">Fruit of the Loom — Maroc</div>
+          <div class="prod-name">T-Shirt Original T 140g</div>
+          <div class="prod-detail">100% coton · 140g/m² · Fil open-end · OEKO-TEX</div>
+          <p class="prod-desc">Entrée de gamme certifié OEKO-TEX STANDARD 100. Idéal grands volumes événementiels.</p>
+          <div class="prod-colors">20 coloris : Blanc · Navy · Noir · Royal Blue · Red…</div>
+          <div class="prod-tags"><span class="prod-tag">OEKO-TEX</span><span class="prod-tag">DTF</span><span class="prod-tag">Sérigraphie</span></div>
+          <div class="prod-footer">
+            <div class="prod-prix">21 MAD TTC<small>gros volumes</small></div>
+            <a href="devis.html" class="btn-devis-sm">Devis →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POLOS -->
+    <div class="produits-panel" id="tab-polo-tab">
+      <div class="prod-card reveal">
+        <div class="prod-visual">
+          <img src="images/polo.jpg" alt="Polo Piqué 65/35"/>
+          <div class="prod-ref">Réf. 0634020</div>
+          <div class="prod-badge">EPI · Corporate</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-supplier">Fruit of the Loom — Maroc</div>
+          <div class="prod-name">Polo Piqué 65/35</div>
+          <div class="prod-detail">65% polyester / 35% coton · Tissu piqué · 3 boutons ton sur ton</div>
+          <p class="prod-desc">Polo corporate professionnel. Idéal restaurants, hôtellerie, retail, BTP, banques.</p>
+          <div class="prod-colors">18 coloris : Blanc · Noir · Navy · Red · Bottle Green…</div>
+          <div class="prod-tags"><span class="prod-tag">EPI</span><span class="prod-tag">Broderie</span><span class="prod-tag">Corporate</span></div>
+          <div class="prod-footer">
+            <div class="prod-prix">59 MAD TTC<small>habillage pro</small></div>
+            <a href="devis.html" class="btn-devis-sm">Devis →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:2.5rem;">
+      <a href="produits.html" class="btn-navy">Voir tout le catalogue →</a>
     </div>
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker"><div class="ticker-track">
-  <span class="ticker-item">Sérigraphie</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">DTF</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Broderie</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Stock immédiat Casablanca</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Importateur direct</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Fruit of the Loom Maroc</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Makito Espagne</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Devis gratuit 24H</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Livraison tout le Maroc</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Sérigraphie</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">DTF</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Broderie</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Stock immédiat Casablanca</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Importateur direct</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Fruit of the Loom Maroc</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Makito Espagne</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Devis gratuit 24H</span><span class="ticker-item">◆</span>
-  <span class="ticker-item">Livraison tout le Maroc</span><span class="ticker-item">◆</span>
-</div></div>
-
-<!-- CATEGORIES -->
-<div class="cats reveal">
-  <div class="cat" onclick="location.href='produits.html#sacs'" style="background:linear-gradient(145deg,#1a2f50,#0e1f3d);">
-    <div class="cat-bg" style="display:flex;align-items:center;justify-content:center;font-size:6rem;opacity:.15;">🛍</div>
-    <div class="cat-overlay"></div>
-    <div class="cat-content"><div class="cat-lbl">Makito Espagne</div><div class="cat-name">Sacs &<br/>Goodies</div><div class="cat-sub">3 références</div></div>
-  </div>
-  <div class="cat" onclick="location.href='produits.html#textile'">
-    <div class="cat-bg"><img src="images/valueweight.jpg" alt="T-Shirts" style="width:100%;height:100%;object-fit:cover;object-position:top;"/></div>
-    <div class="cat-overlay"></div>
-    <div class="cat-content"><div class="cat-lbl">Fruit of the Loom</div><div class="cat-name">T-Shirts</div><div class="cat-sub">dès 21 MAD TTC</div></div>
-  </div>
-  <div class="cat" onclick="location.href='produits.html#textile'">
-    <div class="cat-bg"><img src="images/polo.jpg" alt="Polos" style="width:100%;height:100%;object-fit:cover;object-position:top;"/></div>
-    <div class="cat-overlay"></div>
-    <div class="cat-content"><div class="cat-lbl">Fruit of the Loom</div><div class="cat-name">Polos</div><div class="cat-sub">59 MAD TTC</div></div>
-  </div>
-  <div class="cat" onclick="location.href='produits.html#casquettes'" style="background:linear-gradient(145deg,#2d1f0e,#1a1208);">
-    <div class="cat-bg" style="display:flex;align-items:center;justify-content:center;font-size:6rem;opacity:.15;">🧢</div>
-    <div class="cat-overlay"></div>
-    <div class="cat-content"><div class="cat-lbl">Makito Espagne</div><div class="cat-name">Casquettes</div><div class="cat-sub">18 coloris · 15 MAD TTC</div></div>
-  </div>
-  <div class="cat" onclick="location.href='produits.html#epi'" style="background:linear-gradient(145deg,#1a1a2f,#0e0e1f);">
-    <div class="cat-bg" style="display:flex;align-items:center;justify-content:center;font-size:6rem;opacity:.15;">🦺</div>
-    <div class="cat-overlay"></div>
-    <div class="cat-content"><div class="cat-lbl">Multimarques</div><div class="cat-name">EPI &<br/>Sécurité</div><div class="cat-sub">Sur devis</div></div>
-  </div>
-  <div class="cat" onclick="location.href='produits.html#toges'" style="background:linear-gradient(145deg,#2f1a2f,#1a0e1a);">
-    <div class="cat-bg" style="display:flex;align-items:center;justify-content:center;font-size:6rem;opacity:.15;">🎓</div>
-    <div class="cat-overlay"></div>
-    <div class="cat-content"><div class="cat-lbl">Cérémonies</div><div class="cat-name">Toges</div><div class="cat-sub">Sur mesure</div></div>
-  </div>
-</div>
-
-<!-- EDITORIAL -->
-<div class="editorial reveal">
-  <div class="editorial-img">
-    <img src="images/trendik.jpg" alt="Tote Bag Trendik 240g"/>
-  </div>
-  <div class="editorial-text">
-    <div class="section-label">Notre positionnement</div>
-    <h2 class="editorial-title">Importateur direct,<br/>prix <em>compétitifs</em></h2>
-    <p class="editorial-body">Johns Corporate est votre accès direct aux meilleurs fournisseurs textiles. Stock disponible immédiatement à Casablanca, zéro intermédiaire, prix importateur garantis.<br/><br/>Chaque produit est personnalisable avec votre logo — sérigraphie, DTF ou broderie — et livrable partout au Maroc.</p>
-    <a href="devis.html" class="btn btn-secondary">Demander un devis →</a>
-  </div>
-</div>
-
 <!-- ATOUTS -->
 <section class="atouts">
-  <div class="container">
-    <div style="text-align:center;max-width:55ch;margin:0 auto;">
-      <div class="section-label" style="justify-content:center;">Pourquoi Johns Corporate</div>
-      <h2 class="section-title">Un positionnement <em>unique</em> au Maroc</h2>
+  <div class="atouts-inner">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Pourquoi Johns Corporate</div>
+      <h2 class="section-title">Un positionnement <em>unique</em></h2>
+      <div class="section-line"></div>
     </div>
     <div class="atouts-grid">
-      <div class="atout reveal"><div class="atout-icon">📦</div><div class="atout-title">Stock immédiat</div><p class="atout-desc">Pas d'attente. Vos produits disponibles dès aujourd'hui à Casablanca, prêts à personnaliser.</p></div>
-      <div class="atout reveal"><div class="atout-icon">💰</div><div class="atout-title">Prix importateur direct</div><p class="atout-desc">Accès direct usine Fruit of the Loom Maroc et Makito Espagne. Zéro intermédiaire.</p></div>
-      <div class="atout reveal"><div class="atout-icon">⚡</div><div class="atout-title">Devis en 24H</div><p class="atout-desc">Réponse garantie sous 24 heures ouvrées avec devis personnalisé et détaillé.</p></div>
-      <div class="atout reveal"><div class="atout-icon">🎨</div><div class="atout-title">Personnalisation pro</div><p class="atout-desc">Sérigraphie, DTF, broderie — toutes techniques disponibles pour votre logo.</p></div>
-      <div class="atout reveal"><div class="atout-icon">🚚</div><div class="atout-title">Livraison Maroc entier</div><p class="atout-desc">De Tanger à Agadir. Délais 48-72H pour les références production locale.</p></div>
-      <div class="atout reveal"><div class="atout-icon">🤝</div><div class="atout-title">Réseau revendeur</div><p class="atout-desc">Accès revendeur avec tarifs préférentiels, promotions exclusives et support dédié.</p></div>
+      <div class="atout reveal"><div class="atout-num">01</div><div class="atout-title">Stock immédiat</div><p class="atout-desc">Pas d'attente. Vos produits disponibles dès aujourd'hui à Casablanca, prêts à être personnalisés.</p></div>
+      <div class="atout reveal"><div class="atout-num">02</div><div class="atout-title">Prix importateur direct</div><p class="atout-desc">Accès direct usine Fruit of the Loom Maroc et Makito Espagne. Zéro intermédiaire, prix compétitifs.</p></div>
+      <div class="atout reveal"><div class="atout-num">03</div><div class="atout-title">Devis en 24H</div><p class="atout-desc">Réponse garantie sous 24 heures ouvrées avec devis personnalisé et détaillé, sans engagement.</p></div>
+      <div class="atout reveal"><div class="atout-num">04</div><div class="atout-title">Personnalisation pro</div><p class="atout-desc">Sérigraphie, DTF, broderie — toutes techniques disponibles pour sublimer votre logo.</p></div>
+      <div class="atout reveal"><div class="atout-num">05</div><div class="atout-title">Livraison Maroc entier</div><p class="atout-desc">De Tanger à Agadir, livraison 48-72H pour les références production locale.</p></div>
+      <div class="atout reveal"><div class="atout-num">06</div><div class="atout-title">Réseau revendeur</div><p class="atout-desc">Tarifs professionnels, promotions exclusives et support dédié pour nos partenaires revendeurs.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ZONE REVENDEUR -->
-<div class="rev-zone">
-  <div class="rev-grid">
-    <div class="reveal">
-      <div class="section-label">Accès professionnel exclusif</div>
-      <h2 class="rev-title">Vous êtes <em>revendeur</em> ?</h2>
-      <p class="rev-desc">Rejoignez le réseau Johns Corporate et accédez à des tarifs professionnels, des promotions exclusives et des arrivages en avant-première.</p>
-      <ul class="rev-avantages">
-        <li class="rev-avantage">Tarifs professionnels dégressifs</li>
-        <li class="rev-avantage">Promotions & déstockages exclusifs</li>
-        <li class="rev-avantage">Arrivages en avant-première</li>
-        <li class="rev-avantage">Catalogues & fiches techniques PDF</li>
-        <li class="rev-avantage">Support commercial dédié</li>
-      </ul>
-      <a href="revendeurs.html" class="btn btn-primary btn-lg">Créer un compte revendeur →</a>
+<section class="revendeur-zone">
+  <div class="revendeur-inner reveal">
+    <div class="rev-eyebrow">Accès professionnel exclusif</div>
+    <h2 class="rev-title">Vous êtes <em>revendeur</em> ?</h2>
+    <p class="rev-desc">Rejoignez le réseau Johns Corporate et accédez à des tarifs professionnels, des promotions exclusives et des arrivages en avant-première.</p>
+    <div class="rev-avantages">
+      <span class="rev-avantage">Tarifs dégressifs</span>
+      <span class="rev-avantage">Promotions exclusives</span>
+      <span class="rev-avantage">Arrivages en avant-première</span>
+      <span class="rev-avantage">Catalogues PDF</span>
+      <span class="rev-avantage">Support dédié</span>
     </div>
-    <div class="rev-panel reveal">
-      <div class="rev-panel-title">Espace Revendeur</div>
-      <p style="font-size:.72rem;color:rgba(255,255,255,.35);margin:.3rem 0 0;letter-spacing:.05em;">Réseau professionnel Johns Corporate</p>
-      <div class="rev-stats">
-        <div><div class="rev-stat-num">8+</div><div class="rev-stat-lbl">Références stock</div></div>
-        <div><div class="rev-stat-num">2</div><div class="rev-stat-lbl">Fournisseurs directs</div></div>
-        <div><div class="rev-stat-num">24H</div><div class="rev-stat-lbl">Délai devis</div></div>
-        <div><div class="rev-stat-num">48H</div><div class="rev-stat-lbl">Livraison</div></div>
-      </div>
-      <a href="revendeurs.html" class="btn btn-gold-outline btn-full">Rejoindre le réseau →</a>
-    </div>
-  </div>
-</div>
-
-<!-- PERSONNALISATION -->
-<section class="perso-section">
-  <div class="container">
-    <div style="text-align:center;">
-      <div class="section-label" style="justify-content:center;">Techniques de marquage</div>
-      <h2 class="section-title section-title-white">Votre logo, <em>sublimé</em></h2>
-    </div>
-    <div class="perso-grid">
-      <div class="perso-card reveal"><div class="perso-num">01 / 03</div><div class="perso-icon">🖨</div><div class="perso-title">Sérigraphie</div><p class="perso-desc">Haute durabilité, idéale grandes séries. Rendu vif et professionnel, résiste aux lavages répétés.</p></div>
-      <div class="perso-card reveal"><div class="perso-num">02 / 03</div><div class="perso-icon">✨</div><div class="perso-title">DTF</div><p class="perso-desc">Direct To Film — ultra-précis sans minimum de quantité. Parfait pour petites séries et visuels complexes.</p></div>
-      <div class="perso-card reveal"><div class="perso-num">03 / 03</div><div class="perso-icon">🧵</div><div class="perso-title">Broderie</div><p class="perso-desc">Le haut de gamme. Relief, matière, prestige. Idéal polos, casquettes, vêtements professionnels.</p></div>
+    <div class="rev-btns">
+      <a href="revendeurs.html" class="btn-gold">Créer un compte revendeur →</a>
+      <a href="contact.html" class="btn-outline-gold">En savoir plus</a>
     </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
-<section class="cta-section">
-  <div class="section-label" style="justify-content:center;">Réponse garantie sous 24H</div>
-  <h2>Prêt à démarrer<br/><em>votre projet</em> ?</h2>
-  <p>Envoyez-nous votre demande avec vos quantités, produits et délais. Notre équipe vous répond avec un devis personnalisé sous 24 heures.</p>
+<!-- CTA DEVIS -->
+<section class="cta-devis">
+  <div class="section-eyebrow">Réponse garantie sous 24H</div>
+  <h2 class="cta-title">Prêt à démarrer<br/><em>votre projet</em> ?</h2>
+  <p class="cta-desc">Envoyez votre demande avec quantités, produits et délais. Notre équipe vous répond avec un devis personnalisé sous 24 heures.</p>
   <div class="cta-btns">
-    <a href="devis.html" class="btn btn-primary btn-lg">Demander un devis →</a>
-    <a href="https://wa.me/212600000000" target="_blank" class="btn btn-outline btn-lg">💬 WhatsApp</a>
+    <a href="devis.html" class="btn-navy">Demander un devis gratuit →</a>
+    <a href="https://wa.me/212661218998" target="_blank" class="btn-outline-navy">💬 WhatsApp</a>
   </div>
-  <p style="font-size:.7rem;color:#aaa;margin-top:1.5rem;">Règlement 100% avant livraison · Paiement sécurisé</p>
+  <p style="font-size:0.68rem;color:var(--muted);margin-top:1.5rem;">Règlement 100% avant livraison · Paiement sécurisé</p>
 </section>
 
-
+<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div>
-      <div class="footer-logo-text">Johns <span>Corporate</span></div>
-      <p class="footer-desc">Textile publicitaire, goodies et EPI. Stock disponible immédiatement à Casablanca. Importateur direct Makito & Fruit of the Loom.</p>
+      <div class="footer-brand-name">Johns <span>Corporate</span></div>
+      <p class="footer-desc">Textile publicitaire, goodies et EPI. Stock disponible immédiatement à Casablanca. Importateur direct.</p>
     </div>
     <div>
       <div class="footer-col-title">Catalogue</div>
       <ul class="footer-links">
-        <li><a href="produits.html#sacs">Sacs & Goodies</a></li>
-        <li><a href="produits.html#textile">Textile</a></li>
-        <li><a href="produits.html#casquettes">Casquettes</a></li>
-        <li><a href="produits.html#epi">EPI</a></li>
-        <li><a href="produits.html#toges">Toges</a></li>
+        <li><a href="produits.html#sacs">Sacs & Goodies — Makito</a></li>
+        <li><a href="produits.html#textile">Textile — Fruit of the Loom</a></li>
+        <li><a href="produits.html#epi">EPI — Delta Plus</a></li>
+        <li><a href="produits.html#johns">JOHN'S — Vêtements travail</a></li>
+        <li><a href="produits.html#toges">Toges — Atelier Diplôme</a></li>
       </ul>
     </div>
     <div>
@@ -474,55 +1544,78 @@ h1.hero-title em{font-style:italic;color:var(--gold-light);}
       <ul class="footer-links">
         <li><a href="devis.html">Devis gratuit 24H</a></li>
         <li><a href="revendeurs.html">Espace Revendeur</a></li>
-        <li><a href="personnalisation.html">Personnalisation</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
-    <div class="footer-contact">
+    <div>
       <div class="footer-col-title">Contact</div>
       <div class="footer-contact-item"><span>✉</span><a href="mailto:corpotexmaroc@gmail.com">corpotexmaroc@gmail.com</a></div>
-      <div class="footer-contact-item"><span>💬</span><a href="https://wa.me/212600000000">WhatsApp</a></div>
+      <div class="footer-contact-item"><span>💬</span><a href="https://wa.me/212661218998">WhatsApp</a></div>
       <div class="footer-contact-item"><span>📍</span><span>Casablanca, Maroc</span></div>
-      <div style="margin-top:1.5rem;"><a href="devis.html" class="btn btn-gold-outline btn-sm btn-full">Devis gratuit →</a></div>
+      <div style="margin-top:1.5rem;"><a href="devis.html" class="btn-gold" style="font-size:0.68rem;padding:0.6rem 1.2rem;display:inline-block;">Devis gratuit →</a></div>
     </div>
   </div>
   <div class="footer-bottom">
     <p class="footer-copy">© 2025 Johns Corporate SARL AU — Casablanca, Maroc</p>
-    <p class="footer-copy">Règlement 100% avant livraison</p>
+    <p class="footer-note">Règlement 100% avant livraison</p>
   </div>
 </footer>
-<a href="https://wa.me/212600000000?text=Bonjour%20Johns%20Corporate" class="wa-float" target="_blank">💬</a>
 
+<!-- WHATSAPP FLOTTANT -->
+<a href="https://wa.me/212661218998?text=Bonjour%20Johns%20Corporate" target="_blank" class="wa-float-label">Devis WhatsApp</a>
+<a href="https://wa.me/212661218998?text=Bonjour%20Johns%20Corporate" target="_blank" class="wa-float">💬</a>
 
 <script>
-
-// Nav scroll
+// ── NAV ─────────────────────────────────
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60), {passive:true});
+window.addEventListener('scroll', () => nav.classList.toggle('shadow', scrollY > 20), {passive:true});
+document.getElementById('navToggle').onclick = () => document.getElementById('navLinks').classList.toggle('open');
 
-// Reveal
+// ── SLIDER ──────────────────────────────
+let current = 0;
+const totalSlides = 4;
+let autoplay;
+
+function goTo(n) {
+  current = (n + totalSlides) % totalSlides;
+  document.getElementById('slides').style.transform = `translateX(-${current * 100}%)`;
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === current));
+}
+function nextSlide() { goTo(current + 1); resetAuto(); }
+function prevSlide() { goTo(current - 1); resetAuto(); }
+function resetAuto() { clearInterval(autoplay); autoplay = setInterval(() => goTo(current + 1), 5000); }
+
+// Build dots
+const dots = document.getElementById('slideDots');
+for(let i=0;i<totalSlides;i++) {
+  const d = document.createElement('button');
+  d.className = 'dot' + (i===0?' active':'');
+  d.onclick = () => { goTo(i); resetAuto(); };
+  dots.appendChild(d);
+}
+autoplay = setInterval(() => goTo(current + 1), 5000);
+
+// Touch/swipe
+let touchX = 0;
+document.getElementById('hero').addEventListener('touchstart', e => touchX = e.touches[0].clientX, {passive:true});
+document.getElementById('hero').addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchX;
+  if(Math.abs(dx) > 50) { dx < 0 ? nextSlide() : prevSlide(); }
+}, {passive:true});
+
+// ── TABS PRODUITS ────────────────────────
+function showTab(name, btn) {
+  document.querySelectorAll('.produits-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.produits-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── REVEAL ──────────────────────────────
 const ro = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);} });
-}, {threshold:.07});
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, {threshold: 0.07});
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-
-// CRM helper
-const CRM = {
-  save(data) {
-    const prospects = JSON.parse(localStorage.getItem('jc_prospects') || '[]');
-    prospects.unshift({
-      id: Date.now(),
-      date: new Date().toLocaleDateString('fr-FR'),
-      heure: new Date().toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'}),
-      statut: 'Nouveau',
-      commercial: '',
-      source: 'Site web',
-      ...data
-    });
-    localStorage.setItem('jc_prospects', JSON.stringify(prospects));
-  }
-};
-
 </script>
 </body>
 </html>
